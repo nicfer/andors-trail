@@ -532,13 +532,15 @@ public final class CombatController implements VisualEffectCompletedCallback {
 
 		int damage = Constants.rollValue(attacker.getDamagePotential());
 		boolean isCriticalHit = false;
+		float critMult = 1;
 		if (hasCriticalAttack(attacker, target)) {
 			isCriticalHit = Constants.roll100(attacker.getEffectiveCriticalChance());
 			if (isCriticalHit) {
-				damage *= attacker.getCriticalMultiplier();
+				critMult = attacker.getCriticalMultiplier();
+				damage *= critMult;
 			}
 		}
-		damage -= target.getDamageResistance();
+		damage -= target.getDamageResistance() * critMult;
 		if (damage < 0) damage = 0;
 		controllers.actorStatsController.removeActorHealth(target, damage);
 
