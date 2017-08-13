@@ -90,8 +90,7 @@ public final class DebugInterface {
 			,new DebugButton("hp", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.baseTraits.maxHP = 500;
-					world.model.player.health.max = world.model.player.baseTraits.maxHP;
+					world.model.player.health.max += 500;
 					controllerContext.actorStatsController.setActorMaxHealth(world.model.player);
 					world.model.player.conditions.clear();
 					showToast(mainActivity, "DEBUG: hp set to max", Toast.LENGTH_SHORT);
