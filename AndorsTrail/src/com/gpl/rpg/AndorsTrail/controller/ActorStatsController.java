@@ -409,14 +409,11 @@ public final class ActorStatsController {
 	}
 
 	public void addLevelupEffect(Player player, LevelUpSelection selectionID) {
-		int hpEachLvl = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
-		int hpIncrease = (int) Math.floor((player.baseTraits.hpPerLvl + hpEachLvl - 1) / hpEachLvl);
-		addActorMaxHealth(player, hpIncrease, true);
-		player.baseTraits.maxHP += hpIncrease;
+		int hpIncrease = 0;
 
 		switch (selectionID) {
 			case health:
-				player.baseTraits.hpPerLvl += Constants.LEVELUP_EFFECT_HP_PER_LVL;
+				hpIncrease = Constants.LEVELUP_EFFECT_HEALTH;
 				break;
 			case attackChance:
 				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH;
@@ -433,6 +430,10 @@ public final class ActorStatsController {
 			player.availableSkillIncreases++;
 		}
 		player.level++;
+
+		hpIncrease += player.getSkillLevel(SkillCollection.SkillID.fortitude) * SkillCollection.PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH;
+		addActorMaxHealth(player, hpIncrease, true);
+		player.baseTraits.maxHP += hpIncrease;
 
 		recalculatePlayerStats(player);
 	}

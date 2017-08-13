@@ -151,8 +151,8 @@
 	<string name="levelup_title">Level up</string>
 	<string name="levelup_description">Welcome to level %1$d!</string>
 	<string name="levelup_buttontext">Level up</string>
-	<string name="levelup_add_health">Increase fortitude (+%1$d HP each %2$d levels)</string>
-	<string name="levelup_add_health_description">Every %1$d of this grants you %2$d to your maximum health on each subsequent levelups.</string>
+	<string name="levelup_add_health">Increase health (+%1$d HP)</string>
+	<string name="levelup_add_health_description">Adds %1$d to your maximum health.</string>
 	<string name="levelup_add_attackchance">Increase attack chance (+%1$d)</string>
 	<string name="levelup_add_attackchance_description">Adds %1$d to your base attack chance.</string>
 	<string name="levelup_add_attackdamage">Increase attack damage (+%1$d)</string>
