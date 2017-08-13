@@ -123,7 +123,6 @@ public final class SkillListAdapter extends ArrayAdapter<SkillInfo> {
 		case moreExp: return R.string.skill_shortdescription_more_exp;
 		case cleave: return R.string.skill_shortdescription_cleave;
 		case eater: return R.string.skill_shortdescription_eater;
-		case fortitude: return R.string.skill_shortdescription_fortitude;
 		case evasion: return R.string.skill_shortdescription_evasion;
 		case regeneration: return R.string.skill_shortdescription_regeneration;
 		case lowerExploss: return R.string.skill_shortdescription_lower_exploss;

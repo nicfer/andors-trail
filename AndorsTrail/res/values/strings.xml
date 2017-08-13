@@ -372,7 +372,6 @@
 	<string name="skill_title_more_exp">Quick Learner</string>
 	<string name="skill_title_cleave">Cleave</string>
 	<string name="skill_title_eater">Corpse Eater</string>
-	<string name="skill_title_fortitude">Increased Fortitude</string>
 	<string name="skill_title_evasion">Evasion</string>
 	<string name="skill_title_regeneration">Regeneration</string>
 	<string name="skill_title_lower_exploss">Failure Mastery</string>
@@ -393,7 +392,6 @@
 	<string name="skill_shortdescription_more_exp">More experience from monster kills</string>
 	<string name="skill_shortdescription_cleave">Recover action points on every kill</string>
 	<string name="skill_shortdescription_eater">Recover health points on every kill</string>
-	<string name="skill_shortdescription_fortitude">Gain health on each level up</string>
 	<string name="skill_shortdescription_evasion">Increased chance of fleeing</string>
 	<string name="skill_shortdescription_regeneration">Gain health every round</string>
 	<string name="skill_shortdescription_lower_exploss">Decrease amount of lost experience when dying</string>
@@ -414,7 +412,6 @@
 	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_cleave">Gives +%1$d action points (AP) on every kill per skill level.</string>
 	<string name="skill_longdescription_eater">Gives +%1$d health points (HP) on every kill per skill level.</string>
-	<string name="skill_longdescription_fortitude">On every subsequent level-up, maximum health points (HP) will be raised by %1$d per skill level. This is not applied retroactively, only subsequent level-ups will be affected.</string>
 	<string name="skill_longdescription_evasion">For every skill level, reduces both the chance of failed flee attempts by %1$d %% and the chance that an adjacent monster will attack by %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Gain +%1$d health points (HP) on every round per skill level when no monsters are directly adjacent.</string>
 	<string name="skill_longdescription_lower_exploss">For every skill level, reduces the amount of lost experience caused by death by %1$d %% (percentage of existing exp loss value, not percentage points). %2$d levels will remove all experience loss caused by death.</string>

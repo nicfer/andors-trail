@@ -118,7 +118,6 @@ public final class SkillInfoActivity extends Activity {
 		case moreExp: return R.string.skill_title_more_exp;
 		case cleave: return R.string.skill_title_cleave;
 		case eater: return R.string.skill_title_eater;
-		case fortitude: return R.string.skill_title_fortitude;
 		case evasion: return R.string.skill_title_evasion;
 		case regeneration: return R.string.skill_title_regeneration;
 		case lowerExploss: return R.string.skill_title_lower_exploss;
@@ -167,7 +166,6 @@ public final class SkillInfoActivity extends Activity {
 		case moreExp: return res.getString(R.string.skill_longdescription_more_exp, SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT);
 		case cleave: return res.getString(R.string.skill_longdescription_cleave, SkillCollection.PER_SKILLPOINT_INCREASE_CLEAVE_AP);
 		case eater: return res.getString(R.string.skill_longdescription_eater, SkillCollection.PER_SKILLPOINT_INCREASE_EATER_HEALTH);
-		case fortitude: return res.getString(R.string.skill_longdescription_fortitude, SkillCollection.PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH);
 		case evasion: return res.getString(R.string.skill_longdescription_evasion, SkillCollection.PER_SKILLPOINT_INCREASE_EVASION_FLEE_CHANCE_PERCENTAGE, SkillCollection.PER_SKILLPOINT_INCREASE_EVASION_MONSTER_ATTACK_CHANCE_PERCENTAGE);
 		case regeneration: return res.getString(R.string.skill_longdescription_regeneration, SkillCollection.PER_SKILLPOINT_INCREASE_REGENERATION);
 		case lowerExploss: return res.getString(R.string.skill_longdescription_lower_exploss, SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT, SkillCollection.MAX_LEVEL_LOWER_EXPLOSS);
