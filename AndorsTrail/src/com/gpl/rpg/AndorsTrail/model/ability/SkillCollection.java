@@ -22,7 +22,6 @@ public final class SkillCollection {
 		,moreExp
 		,cleave				// +10ap on kill
 		,eater				// +1hp per kill
-		,fortitude			// +N hp per levelup
 		,evasion			// increase successful flee chance & reduce chance of monster attack
 		,regeneration		// +N hp per round
 		,lowerExploss
@@ -83,7 +82,6 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT = 5;
 	public static final int PER_SKILLPOINT_INCREASE_CLEAVE_AP = 3;
 	public static final int PER_SKILLPOINT_INCREASE_EATER_HEALTH = 1;
-	public static final int PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH = 1;
 	public static final int PER_SKILLPOINT_INCREASE_EVASION_FLEE_CHANCE_PERCENTAGE = 5;
 	public static final int PER_SKILLPOINT_INCREASE_EVASION_MONSTER_ATTACK_CHANCE_PERCENTAGE = 5;
 	public static final int PER_SKILLPOINT_INCREASE_REGENERATION = 1;
@@ -162,13 +160,10 @@ public final class SkillCollection {
 		initializeSkill(new SkillInfo(SkillID.eater, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 20, 20)
 		}));
-		initializeSkill(new SkillInfo(SkillID.fortitude, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requireExperienceLevels(15, -10)
-		}));
 		initializeSkill(new SkillInfo(SkillID.evasion, MAX_LEVEL_EVASION, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.regeneration, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 30, 0)
-			,SkillLevelRequirement.requireOtherSkill(SkillID.fortitude, 1)
+			,SkillLevelRequirement.requireExperienceLevels(15, -10)
 		}));
 		initializeSkill(new SkillInfo(SkillID.lowerExploss, MAX_LEVEL_LOWER_EXPLOSS, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
 		initializeSkill(new SkillInfo(SkillID.magicfinder, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
