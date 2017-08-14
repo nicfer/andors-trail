@@ -121,7 +121,7 @@ public final class MapController {
 		controllers.combatController.exitCombat(false);
 		final Player player = world.model.player;
 		int lostExp = player.getCurrentLevelExperience() * Constants.PERCENT_EXP_LOST_WHEN_DIED / 100;
-		lostExp -= lostExp * player.getSkillLevel(SkillCollection.SkillID.lowerExploss) * SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT / 100;
+		lostExp -= lostExp * player.getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT / 100;
 
 		if (lostExp < 0) lostExp = 0;
 		controllers.actorStatsController.addExperience(-lostExp);

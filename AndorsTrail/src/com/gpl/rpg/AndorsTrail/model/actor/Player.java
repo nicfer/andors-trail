@@ -159,8 +159,10 @@ public final class Player extends Actor {
 	}
 
 	public void recalculateLevelExperience() {
+		int discount = getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT;
 		int experienceRequiredToReachThisLevel = getRequiredExperience(level);
-		levelExperience.set(getRequiredExperienceForNextLevel(level), totalExperience - experienceRequiredToReachThisLevel);
+		levelExperience.set(getRequiredExperienceForNextLevel(level) * (100 - discount) / 100,// - discountExp,
+				totalExperience - experienceRequiredToReachThisLevel);
 	}
 
 	private static int getRequiredExperience(int currentLevel) {

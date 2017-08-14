@@ -126,8 +126,6 @@ public final class SkillListAdapter extends ArrayAdapter<SkillInfo> {
 		case fortitude: return R.string.skill_shortdescription_fortitude;
 		case evasion: return R.string.skill_shortdescription_evasion;
 		case regeneration: return R.string.skill_shortdescription_regeneration;
-		case lowerExploss: return R.string.skill_shortdescription_lower_exploss;
-		case magicfinder: return R.string.skill_shortdescription_magicfinder;
 		case resistanceMental: return R.string.skill_shortdescription_resistance_mental;
 		case resistancePhysical: return R.string.skill_shortdescription_resistance_physical_capacity;
 		case resistanceBlood: return R.string.skill_shortdescription_resistance_blood_disorder;

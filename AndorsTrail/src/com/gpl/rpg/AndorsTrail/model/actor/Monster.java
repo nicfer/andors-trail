@@ -62,7 +62,6 @@ public final class Monster extends Actor {
 
 	public void createLoot(Loot container, Player player) {
 		int exp = this.getExp();
-		exp += exp * player.getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT / 100;
 		container.exp += exp;
 		DropList dropList = getDropList();
 		if (dropList == null) return;
