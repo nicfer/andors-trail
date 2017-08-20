@@ -409,26 +409,33 @@ public final class ActorStatsController {
 	}
 
 	public void addLevelupEffect(Player player, LevelUpSelection selectionID) {
-		int hpEachLvl = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
-		int hpIncrease = (int) Math.floor((player.baseTraits.hpPerLvl + hpEachLvl - 1) / hpEachLvl);
-		addActorMaxHealth(player, hpIncrease, true);
-		player.baseTraits.maxHP += hpIncrease;
-
 		switch (selectionID) {
 			case health:
 				player.baseTraits.hpPerLvl += Constants.LEVELUP_EFFECT_HP_PER_LVL;
 				break;
 			case attackChance:
-				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH;
+				int skillBonus = player.getSkillLevel(SkillCollection.SkillID.weaponChance) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE;
+				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH + skillBonus;
 				break;
 			case attackDamage:
-				player.baseTraits.damagePotential.max += Constants.LEVELUP_EFFECT_ATK_DMG;
-				player.baseTraits.damagePotential.current += Constants.LEVELUP_EFFECT_ATK_DMG;
+				skillBonus = player.getSkillLevel(SkillCollection.SkillID.weaponDmg) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX;
+				int skillBonusMin = player.getSkillLevel(SkillCollection.SkillID.weaponDmg) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN;
+				player.baseTraits.damagePotential.max += Constants.LEVELUP_EFFECT_ATK_DMG + skillBonus;
+				player.baseTraits.damagePotential.current += Constants.LEVELUP_EFFECT_ATK_DMG + skillBonusMin;
 				break;
 			case blockChance:
-				player.baseTraits.blockChance += Constants.LEVELUP_EFFECT_DEF_CH;
+				skillBonus = player.getSkillLevel(SkillCollection.SkillID.dodge) * SkillCollection.PER_SKILLPOINT_INCREASE_DODGE;
+				player.baseTraits.blockChance += Constants.LEVELUP_EFFECT_DEF_CH + skillBonus;
 				break;
 		}
+
+		player.baseTraits.hpFrags += player.baseTraits.hpPerLvl;
+		int advanceHP = player.baseTraits.hpFrags / Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
+		if (advanceHP > 0) {
+			player.baseTraits.hpFrags -= advanceHP * Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
+			player.baseTraits.maxHP += advanceHP;
+		}
+
 		if (player.nextLevelAddsNewSkillpoint()) {
 			player.availableSkillIncreases++;
 		}

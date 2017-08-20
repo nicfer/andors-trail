@@ -52,6 +52,7 @@ public final class Player extends Actor {
 		public int maxAP;
 		public int maxHP;
 		public int hpPerLvl;
+		public int hpFrags;
 		public int moveCost;
 		public int attackCost;
 		public int attackChance;
@@ -96,6 +97,7 @@ public final class Player extends Actor {
 		baseTraits.maxAP = 10;
 		baseTraits.maxHP = 25;
 		baseTraits.hpPerLvl = 0;
+		baseTraits.hpFrags = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
 		baseTraits.moveCost = 6;
 		baseTraits.attackCost = DEFAULT_PLAYER_ATTACKCOST;
 		baseTraits.attackChance = 60;
@@ -280,6 +282,7 @@ public final class Player extends Actor {
 		this.baseTraits.maxAP = src.readInt();
 		this.baseTraits.maxHP = src.readInt();
 		this.baseTraits.hpPerLvl = src.readInt();
+		this.baseTraits.hpFrags = src.readInt();
 		this.name = src.readUTF();
 		this.moveCost = src.readInt();
 
@@ -366,6 +369,7 @@ public final class Player extends Actor {
 		dest.writeInt(baseTraits.maxAP);
 		dest.writeInt(baseTraits.maxHP);
 		dest.writeInt(baseTraits.hpPerLvl);
+		dest.writeInt(baseTraits.hpFrags);
 		dest.writeUTF(name);
 		dest.writeInt(moveCost); // TODO: Should we really write this?
 		dest.writeInt(baseTraits.attackCost);
