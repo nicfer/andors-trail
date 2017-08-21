@@ -441,10 +441,6 @@ public final class ActorStatsController {
 		}
 		player.level++;
 
-		hpIncrease += player.getSkillLevel(SkillCollection.SkillID.fortitude) * SkillCollection.PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH;
-		addActorMaxHealth(player, hpIncrease, true);
-		player.baseTraits.maxHP += hpIncrease;
-
 		recalculatePlayerStats(player);
 	}
 

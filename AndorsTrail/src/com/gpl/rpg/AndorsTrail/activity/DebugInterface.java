@@ -28,25 +28,27 @@ public final class DebugInterface {
 
 	public void addDebugButtons() {
 		if (!AndorsTrailApplication.DEVELOPMENT_DEBUGBUTTONS) return;
+		if (!world.model.player.getName().startsWith("debug")) return;
 
 		addDebugButtons(new DebugButton[] {
-			new DebugButton("dmg", new OnClickListener() {
+			/*new DebugButton("dmg", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.damagePotential.set(500, 500);
-					world.model.player.attackChance = 500;
-					world.model.player.attackCost = 1;
+					world.model.player.damagePotential.max += 500;
+					world.model.player.damagePotential.current += 500;
+					world.model.player.attackChance += 500;
 					showToast(mainActivity, "DEBUG: damagePotential=500, chance=500%, cost=1", Toast.LENGTH_SHORT);
 				}
 			})
-			/*,new DebugButton("dmg=1", new OnClickListener() {
+			,new DebugButton("dmg=1", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					world.model.player.damagePotential.set(1, 1);
 					showToast(mainActivity, "DEBUG: damagePotential=1", Toast.LENGTH_SHORT);
 				}
-			})*/
-			/*,new DebugButton("items", new OnClickListener() {
+			})
+			,*/
+			new DebugButton("items", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					world.model.player.inventory.addItem(world.itemTypes.getItemType("elytharan_redeemer"));
@@ -64,20 +66,24 @@ public final class DebugInterface {
 
 					showToast(mainActivity, "DEBUG: added items", Toast.LENGTH_SHORT);
 				}
-			})*/
+			})
 			/*,new DebugButton("prim", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "blackwater_mountain29", "south", 0, 0);
 				}
 			})*/
-			/*,new DebugButton("exp+=10000", new OnClickListener() {
+			,new DebugButton("exp+=10000", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					controllerContext.actorStatsController.addExperience(10000);
-					showToast(mainActivity, "DEBUG: given 10000 exp", Toast.LENGTH_SHORT);
+					int xpToAdd = 10000;
+					if (world.model.player.levelExperience.max > 100000) {
+						xpToAdd = 100000;
+					}
+					controllerContext.actorStatsController.addExperience(xpToAdd);
+					showToast(mainActivity, "DEBUG: given " + xpToAdd + " exp", Toast.LENGTH_SHORT);
 				}
-			})*/
+			})
 			,new DebugButton("reset", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -87,7 +93,7 @@ public final class DebugInterface {
 					showToast(mainActivity, "DEBUG: maps respawned", Toast.LENGTH_SHORT);
 				}
 			})
-			,new DebugButton("hp", new OnClickListener() {
+			/*,new DebugButton("hp", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					world.model.player.health.max += 500;
@@ -96,7 +102,7 @@ public final class DebugInterface {
 					showToast(mainActivity, "DEBUG: hp set to max", Toast.LENGTH_SHORT);
 				}
 			})
-			/*
+
 			,new DebugButton("cg", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
