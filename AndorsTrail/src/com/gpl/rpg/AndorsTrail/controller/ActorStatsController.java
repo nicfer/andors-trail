@@ -411,7 +411,11 @@ public final class ActorStatsController {
 	public void addLevelupEffect(Player player, LevelUpSelection selectionID) {
 		switch (selectionID) {
 			case health:
-				player.baseTraits.hpPerLvl += Constants.LEVELUP_EFFECT_HP_PER_LVL;
+				if (player.baseTraits.hpPerLvl <= 0) {
+					player.baseTraits.hpPerLvl = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
+				} else {
+					player.baseTraits.hpPerLvl += Constants.LEVELUP_EFFECT_HP_PER_LVL;
+				}
 				break;
 			case attackChance:
 				int skillBonus = player.getSkillLevel(SkillCollection.SkillID.weaponChance) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE;

@@ -22,7 +22,6 @@ public final class SkillCollection {
 		,moreExp
 		,cleave				// +10ap on kill
 		,eater				// +1hp per kill
-		,fortitude			// +N hp per levelup
 		,evasion			// increase successful flee chance & reduce chance of monster attack
 		,regeneration		// +N hp per round
 		,resistanceMental	// lowers chance to get negative active conditions by monsters (Mental like Dazed)
@@ -158,15 +157,12 @@ public final class SkillCollection {
 			,SkillLevelRequirement.requireOtherSkill(SkillID.weaponDmg, 1)
 		}));
 		initializeSkill(new SkillInfo(SkillID.eater, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 20, 20)
-		}));
-		initializeSkill(new SkillInfo(SkillID.fortitude, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requireExperienceLevels(15, -10)
+			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 20, 10)
 		}));
 		initializeSkill(new SkillInfo(SkillID.evasion, MAX_LEVEL_EVASION, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.regeneration, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 30, 0)
-			,SkillLevelRequirement.requireOtherSkill(SkillID.fortitude, 1)
+			,SkillLevelRequirement.requireExperienceLevels(15, -5)
 		}));
 		initializeSkill(new SkillInfo(SkillID.resistanceMental, MAX_LEVEL_RESISTANCE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, null));
 		initializeSkill(new SkillInfo(SkillID.resistancePhysical, MAX_LEVEL_RESISTANCE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, null));

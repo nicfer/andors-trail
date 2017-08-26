@@ -97,7 +97,7 @@ public final class Player extends Actor {
 		baseTraits.maxAP = 10;
 		baseTraits.maxHP = 25;
 		baseTraits.hpPerLvl = 0;
-		baseTraits.hpFrags = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
+		baseTraits.hpFrags = 0;
 		baseTraits.moveCost = 6;
 		baseTraits.attackCost = DEFAULT_PLAYER_ATTACKCOST;
 		baseTraits.attackChance = 60;
