@@ -2,6 +2,7 @@ package com.gpl.rpg.AndorsTrail.model.item;
 
 import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.controller.SkillController;
+import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.util.ConstRange;
 
@@ -18,7 +19,14 @@ public final class DropList {
 			if (Constants.rollResult(item.chance, chanceRollBias)) {
 
 				final int quantityRollBias = SkillController.getDropQuantityRollBias(item, player);
-				int quantity = Constants.rollValue(item.quantity, quantityRollBias);
+				ConstRange itemQuantity = item.quantity;
+				if (quantityRollBias > 100) {
+					int maxQuantity = itemQuantity.max * Math.min(quantityRollBias,
+										SkillCollection.MAX_COINFINDER_ADD_PERCENT) / 100;
+					itemQuantity = new ConstRange(itemQuantity.current,maxQuantity);
+				}
+
+				int quantity = Constants.rollValue(itemQuantity, quantityRollBias);
 
 				loot.add(item.itemType, quantity);
 			}

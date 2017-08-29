@@ -76,6 +76,7 @@ public final class SkillCollection {
 	public static final int INCREASE_SPEED_EACH_N_LVLS = 15;
 	public static final int PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE = 3;
 	public static final int PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT = 30;
+	public static final int MAX_COINFINDER_ADD_PERCENT = 200;
 	public static final int PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT = 50;
 	public static final int PER_SKILLPOINT_INCREASE_COINFINDER_QUANTITY_PERCENT = 50;
 	public static final int PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT = 5;
