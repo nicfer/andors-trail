@@ -395,7 +395,7 @@
 	<string name="skill_shortdescription_resistance_blood_disorder">Resistance against blood disorders</string>
 
 	<string name="skill_longdescription_weapon_chance">Multiplies attack chance by %1$d%% for each skill level.</string>
-	<string name="skill_longdescription_weapon_dmg">Multiplies min/max damage by %1$d%% for each skill level.</string>
+	<string name="skill_longdescription_weapon_dmg">Multiplies min damage by %1$d%% and max damage by %2$d%% for each skill level.</string>
 	<string name="skill_longdescription_dodge">Multiplies block chance by %1$d%% for each skill level.</string>
 	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level. At max level, gives 1 damage resistance per %2$d block chance</string>
 	<string name="skill_longdescription_more_criticals">Increases any existing critical skill given by equipment by %1$d %% for each skill level.</string>

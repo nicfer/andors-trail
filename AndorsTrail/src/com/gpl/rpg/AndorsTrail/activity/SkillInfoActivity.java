@@ -152,7 +152,7 @@ public final class SkillInfoActivity extends Activity {
 	private static String getSkillLongDescription(final SkillCollection.SkillID skill, final Resources res) {
 		switch (skill) {
 		case weaponChance: return res.getString(R.string.skill_longdescription_weapon_chance, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE);
-		case weaponDmg: return res.getString(R.string.skill_longdescription_weapon_dmg, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX);
+		case weaponDmg: return res.getString(R.string.skill_longdescription_weapon_dmg, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX);
 		case dodge: return res.getString(R.string.skill_longdescription_dodge, SkillCollection.PER_SKILLPOINT_INCREASE_DODGE);
 		case barkSkin: return res.getString(R.string.skill_longdescription_barkskin, SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN), SkillCollection.INCREASE_BARKSKIN_EACH_N_BLOCK;
 		case moreCriticals: return res.getString(R.string.skill_longdescription_more_criticals, SkillCollection.PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT);
