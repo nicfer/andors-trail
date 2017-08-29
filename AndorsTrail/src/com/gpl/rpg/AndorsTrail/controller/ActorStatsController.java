@@ -418,18 +418,14 @@ public final class ActorStatsController {
 				}
 				break;
 			case attackChance:
-				int skillBonus = player.getSkillLevel(SkillCollection.SkillID.weaponChance) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE;
-				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH + skillBonus;
+				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH;
 				break;
 			case attackDamage:
-				skillBonus = player.getSkillLevel(SkillCollection.SkillID.weaponDmg) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX;
-				int skillBonusMin = player.getSkillLevel(SkillCollection.SkillID.weaponDmg) * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN;
-				player.baseTraits.damagePotential.max += Constants.LEVELUP_EFFECT_ATK_DMG + skillBonus;
-				player.baseTraits.damagePotential.current += Constants.LEVELUP_EFFECT_ATK_DMG + skillBonusMin;
+				player.baseTraits.damagePotential.max += Constants.LEVELUP_EFFECT_ATK_DMG;
+				player.baseTraits.damagePotential.current += Constants.LEVELUP_EFFECT_ATK_DMG;
 				break;
 			case blockChance:
-				skillBonus = player.getSkillLevel(SkillCollection.SkillID.dodge) * SkillCollection.PER_SKILLPOINT_INCREASE_DODGE;
-				player.baseTraits.blockChance += Constants.LEVELUP_EFFECT_DEF_CH + skillBonus;
+				player.baseTraits.blockChance += Constants.LEVELUP_EFFECT_DEF_CH;
 				break;
 		}
 

@@ -27,20 +27,37 @@ public final class SkillController {
 	}
 
 	public void applySkillEffects(Player player) {
-		/*player.attackChance += SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE * player.getSkillLevel(SkillID.weaponChance);
-		player.damagePotential.addToMax(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX * player.getSkillLevel(SkillID.weaponDmg));
-		player.damagePotential.add(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN * player.getSkillLevel(SkillID.weaponDmg), false);
-		player.blockChance += SkillCollection.PER_SKILLPOINT_INCREASE_DODGE * player.getSkillLevel(SkillID.dodge);*/
-		player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin);
+		player.attackChance += player.attackChance * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE
+				* player.getSkillLevel(SkillID.weaponChance) / 100;
+		player.damagePotential.addToMax(player.damagePotential.max * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX
+				* player.getSkillLevel(SkillID.weaponDmg) / 100);
+		player.damagePotential.add(player.damagePotential.current * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN
+				* player.getSkillLevel(SkillID.weaponDmg) / 100, false);
+		player.blockChance += player.blockChance * SkillCollection.PER_SKILLPOINT_INCREASE_DODGE
+				* player.getSkillLevel(SkillID.dodge) / 100;
+		if (player.getSkillLevel(SkillID.barkSkin) >= SkillCollection.MAX_LEVEL_BARKSKIN) {
+			player.damageResistance += player.blockChance / (SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN
+										* SkillCollection.INCREASE_BARKSKIN_EACH_N_BLOCK);
+		} else {
+			player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin);
+		}
 		if (player.hasCriticalSkillEffect()) {
 			if (player.criticalSkill > 0) {
 				player.criticalSkill += player.criticalSkill * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT * player.getSkillLevel(SkillID.moreCriticals) / 100;
 			}
 		}
 		if (player.hasCriticalMultiplierEffect()) {
-			player.criticalMultiplier += player.criticalMultiplier * SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT * player.getSkillLevel(SkillID.betterCriticals) / 100;
+			player.criticalMultiplier += player.criticalMultiplier
+					* SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT
+					* player.getSkillLevel(SkillID.betterCriticals) / 100;
 		}
-		controllers.actorStatsController.addActorMaxAP(player, SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed), false);
+		if (player.getSkillLevel(SkillID.speed) >= SkillCollection.MAX_LEVEL_SPEED) {
+			controllers.actorStatsController.addActorMaxAP(player, player.level
+					/ SkillCollection.INCREASE_SPEED_EACH_N_LVLS, false);
+		} else {
+			controllers.actorStatsController.addActorMaxAP(player,
+					SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed), false);
+		}
 		/*final int berserkLevel = player.getSkillLevel(Skills.SKILL_BERSERKER);
 		if (berserkLevel > 0) {
 			final int berserkHealth = player.health.max * Skills.BERSERKER_STARTS_AT_HEALTH_PERCENT / 100;

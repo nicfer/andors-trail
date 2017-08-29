@@ -65,14 +65,16 @@ public final class SkillCollection {
 
 
 
-	public static final int PER_SKILLPOINT_INCREASE_WEAPON_CHANCE = 1;
-	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX = 1;
-	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN = 0;
-	public static final int PER_SKILLPOINT_INCREASE_DODGE = 1;
+	public static final int PER_SKILLPOINT_INCREASE_WEAPON_CHANCE = 5;
+	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX = 5;
+	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN = 10;
+	public static final int PER_SKILLPOINT_INCREASE_DODGE = 10;
 	public static final int PER_SKILLPOINT_INCREASE_BARKSKIN = 1;
+	public static final int INCREASE_BARKSKIN_EACH_N_BLOCK = 15;
 	public static final int PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT = 20;
 	public static final int PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT = 25;
 	public static final int PER_SKILLPOINT_INCREASE_SPEED = 1;
+	public static final int INCREASE_SPEED_EACH_N_LVLS = 15;
 	public static final int PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE = 4;
 	public static final int PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT = 30;
 	public static final int PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT = 50;
@@ -81,7 +83,6 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT = 17;
 	public static final int PER_SKILLPOINT_INCREASE_CLEAVE_AP = 3;
 	public static final int PER_SKILLPOINT_INCREASE_EATER_HEALTH = 1;
-	public static final int PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH = 1;
 	public static final int PER_SKILLPOINT_INCREASE_EVASION_FLEE_CHANCE_PERCENTAGE = 5;
 	public static final int PER_SKILLPOINT_INCREASE_EVASION_MONSTER_ATTACK_CHANCE_PERCENTAGE = 5;
 	public static final int PER_SKILLPOINT_INCREASE_REGENERATION = 1;
@@ -121,8 +122,8 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_SPECIALIZATION_DUALWIELD_BC_PERCENT = 50;
 
 	private static final int MAX_LEVEL_BARTER = (int) Math.floor((float) Constants.MARKET_PRICEFACTOR_PERCENT / PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE);
-	private static final int MAX_LEVEL_BARKSKIN = 5;
-	private static final int MAX_LEVEL_SPEED = 2;
+	public static final int MAX_LEVEL_BARKSKIN = 5;
+	public static final int MAX_LEVEL_SPEED = 3;
 	private static final int MAX_LEVEL_EVASION = Math.max(
 			Constants.FLEE_FAIL_CHANCE_PERCENT / PER_SKILLPOINT_INCREASE_EVASION_FLEE_CHANCE_PERCENTAGE
 			,Constants.MONSTER_AGGRESSION_CHANCE_PERCENT / PER_SKILLPOINT_INCREASE_EVASION_MONSTER_ATTACK_CHANCE_PERCENTAGE
@@ -141,14 +142,14 @@ public final class SkillCollection {
 		initializeSkill(new SkillInfo(SkillID.dodge, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.barkSkin, MAX_LEVEL_BARKSKIN, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requireExperienceLevels(10, 0)
-			,SkillLevelRequirement.requirePlayerStats(Player.StatID.blockChance, 15, 0)
+			,SkillLevelRequirement.requirePlayerStats(Player.StatID.blockChance, INCREASE_BARKSKIN_EACH_N_BLOCK, 0)
 		}));
 		initializeSkill(new SkillInfo(SkillID.moreCriticals, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.criticals, null));
 		initializeSkill(new SkillInfo(SkillID.betterCriticals, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.criticals, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requireOtherSkill(SkillID.moreCriticals, 1)
 		}));
 		initializeSkill(new SkillInfo(SkillID.speed, MAX_LEVEL_SPEED, SkillInfo.LevelUpType.alwaysShown, SkillCategory.offense, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requireExperienceLevels(15, 0)
+			SkillLevelRequirement.requireExperienceLevels(INCREASE_SPEED_EACH_N_LVLS, 0)
 		}));
 		initializeSkill(new SkillInfo(SkillID.coinfinder, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
 		initializeSkill(new SkillInfo(SkillID.moreExp, MAX_LEVEL_MORE_EXP, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
@@ -157,7 +158,7 @@ public final class SkillCollection {
 			,SkillLevelRequirement.requireOtherSkill(SkillID.weaponDmg, 1)
 		}));
 		initializeSkill(new SkillInfo(SkillID.eater, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 20, 10)
+			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 15, 15)
 		}));
 		initializeSkill(new SkillInfo(SkillID.evasion, MAX_LEVEL_EVASION, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.regeneration, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {

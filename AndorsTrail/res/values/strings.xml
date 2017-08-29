@@ -378,10 +378,10 @@
 	<string name="skill_title_resistance_physical_capacity">Enduring Body</string>
 	<string name="skill_title_resistance_blood_disorder">Pure Blood</string>
 
-	<string name="skill_shortdescription_weapon_chance">More attack chance on level ups</string>
-	<string name="skill_shortdescription_weapon_dmg">More max attack damage on level ups</string>
+	<string name="skill_shortdescription_weapon_chance">More attack chance</string>
+	<string name="skill_shortdescription_weapon_dmg">More attack damage</string>
 	<string name="skill_shortdescription_barter">Better shop prices</string>
-	<string name="skill_shortdescription_dodge">More block chance on level ups</string>
+	<string name="skill_shortdescription_dodge">More block chance</string>
 	<string name="skill_shortdescription_barkskin">Damage resistance</string>
 	<string name="skill_shortdescription_more_criticals">Increased critical skill</string>
 	<string name="skill_shortdescription_better_criticals">Increased critical damage</string>
@@ -396,14 +396,14 @@
 	<string name="skill_shortdescription_resistance_physical_capacity">Resistance against physical capacity conditions</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Resistance against blood disorders</string>
 
-	<string name="skill_longdescription_weapon_chance">Adds %1$d extra attack chance per skill level on levelup.</string>
-	<string name="skill_longdescription_weapon_dmg">Adds %1$d max damage per skill level on levelup.</string>
+	<string name="skill_longdescription_weapon_chance">Multiplies attack chance by %1$d%% for each skill level.</string>
+	<string name="skill_longdescription_weapon_dmg">Multiplies min/max damage by %1$d%% for each skill level.</string>
 	<string name="skill_longdescription_barter">For every skill level, decreases the buying and selling gold penalty by %1$d percentage points.</string>
-	<string name="skill_longdescription_dodge">Adds %1$d extra block chance per each skill level on levelup.</string>
-	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level.</string>
+	<string name="skill_longdescription_dodge">Multiplies block chance by %1$d%% for each skill level.</string>
+	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level. At max level, gives 1 damage resistance per %2$d block chance</string>
 	<string name="skill_longdescription_more_criticals">Increases any existing critical skill given by equipment by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_better_criticals">Increases any existing critical multiplier given by equipment by %1$d %% for each skill level.</string>
-	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level.</string>
+	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level. At max level, increases 1 AP each %2$d levels</string>
 	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to the maximum amount that the monster drops). Also, increases the chance of finding non-ordinary items by %3$d %% for every skill level.</string>
 	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level and reduces experience lost by %2$d %%.</string>
 	<string name="skill_longdescription_cleave">Gives +%1$d action points (AP) on every kill per skill level.</string>

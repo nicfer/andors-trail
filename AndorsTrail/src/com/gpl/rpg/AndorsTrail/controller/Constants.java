@@ -8,7 +8,7 @@ import java.util.Random;
 
 public final class Constants {
 	public static final int PERCENT_EXP_LOST_WHEN_DIED = 30;
-	public static final int LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS = 3;
+	public static final int LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS = 2;
 	public static final int LEVELUP_EFFECT_HP_PER_LVL = 1;
 	public static final int LEVELUP_EFFECT_ATK_CH = 5;
 	public static final int LEVELUP_EFFECT_ATK_DMG = 1;
