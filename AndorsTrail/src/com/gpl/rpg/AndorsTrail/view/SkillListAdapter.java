@@ -113,7 +113,6 @@ public final class SkillListAdapter extends ArrayAdapter<SkillInfo> {
 		switch (skill) {
 		case weaponChance: return R.string.skill_shortdescription_weapon_chance;
 		case weaponDmg: return R.string.skill_shortdescription_weapon_dmg;
-		case barter: return R.string.skill_shortdescription_barter;
 		case dodge: return R.string.skill_shortdescription_dodge;
 		case barkSkin: return R.string.skill_shortdescription_barkskin;
 		case moreCriticals: return R.string.skill_shortdescription_more_criticals;

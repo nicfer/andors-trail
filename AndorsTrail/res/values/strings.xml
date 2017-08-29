@@ -362,7 +362,6 @@
 
 	<string name="skill_title_weapon_chance">Weapon Accuracy</string>
 	<string name="skill_title_weapon_dmg">Hard Hit</string>
-	<string name="skill_title_barter">Merchant</string>
 	<string name="skill_title_dodge">Dodge</string>
 	<string name="skill_title_barkskin">Bark Skin</string>
 	<string name="skill_title_more_criticals">More Criticals</string>
@@ -380,13 +379,12 @@
 
 	<string name="skill_shortdescription_weapon_chance">More attack chance</string>
 	<string name="skill_shortdescription_weapon_dmg">More attack damage</string>
-	<string name="skill_shortdescription_barter">Better shop prices</string>
 	<string name="skill_shortdescription_dodge">More block chance</string>
 	<string name="skill_shortdescription_barkskin">Damage resistance</string>
 	<string name="skill_shortdescription_more_criticals">Increased critical skill</string>
 	<string name="skill_shortdescription_better_criticals">Increased critical damage</string>
 	<string name="skill_shortdescription_speed">Increased maximum action points</string>
-	<string name="skill_shortdescription_coinfinder">Higher chance of finding gold and magic items</string>
+	<string name="skill_shortdescription_coinfinder">Higher chance of finding gold and magic items, and enhances shop prices</string>
 	<string name="skill_shortdescription_more_exp">More experience from monster kills and less experience loss</string>
 	<string name="skill_shortdescription_cleave">Recover action points on every kill</string>
 	<string name="skill_shortdescription_eater">Recover health points on every kill</string>
@@ -398,13 +396,12 @@
 
 	<string name="skill_longdescription_weapon_chance">Multiplies attack chance by %1$d%% for each skill level.</string>
 	<string name="skill_longdescription_weapon_dmg">Multiplies min/max damage by %1$d%% for each skill level.</string>
-	<string name="skill_longdescription_barter">For every skill level, decreases the buying and selling gold penalty by %1$d percentage points.</string>
 	<string name="skill_longdescription_dodge">Multiplies block chance by %1$d%% for each skill level.</string>
 	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level. At max level, gives 1 damage resistance per %2$d block chance</string>
 	<string name="skill_longdescription_more_criticals">Increases any existing critical skill given by equipment by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_better_criticals">Increases any existing critical multiplier given by equipment by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level. At max level, increases 1 AP each %2$d levels</string>
-	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to the maximum amount that the monster drops). Also, increases the chance of finding non-ordinary items by %3$d %% for every skill level.</string>
+	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to the maximum amount that the monster drops). Also, increases the chance of finding non-ordinary items by %3$d %% for every skill level, and decreases the buying and selling gold penalty by %4$d percentage points.</string>
 	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level and reduces experience lost by %2$d %%.</string>
 	<string name="skill_longdescription_cleave">Gives +%1$d action points (AP) on every kill per skill level.</string>
 	<string name="skill_longdescription_eater">Gives +%1$d health points (HP) on every kill per skill level.</string>

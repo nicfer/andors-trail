@@ -236,7 +236,9 @@ public final class ItemController {
 
 	private static int getMarketPriceFactor(Player player) {
 		return Constants.MARKET_PRICEFACTOR_PERCENT
-			- player.getSkillLevel(SkillCollection.SkillID.barter) * SkillCollection.PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE;
+			- Math.min(player.getSkillLevel(SkillCollection.SkillID.coinfinder)
+				* SkillCollection.PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE
+							,SkillCollection.MAX_LEVEL_BARTER);
 	}
 	public static int getBuyingPrice(Player player, ItemType itemType) {
 		return itemType.baseMarketCost + itemType.baseMarketCost * getMarketPriceFactor(player) / 100;

@@ -12,7 +12,6 @@ public final class SkillCollection {
 	public static enum SkillID {
 		weaponChance
 		,weaponDmg
-		,barter
 		,dodge
 		,barkSkin
 		,moreCriticals
@@ -75,7 +74,7 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT = 25;
 	public static final int PER_SKILLPOINT_INCREASE_SPEED = 1;
 	public static final int INCREASE_SPEED_EACH_N_LVLS = 15;
-	public static final int PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE = 4;
+	public static final int PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE = 3;
 	public static final int PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT = 30;
 	public static final int PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT = 50;
 	public static final int PER_SKILLPOINT_INCREASE_COINFINDER_QUANTITY_PERCENT = 50;
@@ -121,7 +120,7 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_SPECIALIZATION_DUALWIELD_AC_PERCENT = 50;
 	public static final int PER_SKILLPOINT_INCREASE_SPECIALIZATION_DUALWIELD_BC_PERCENT = 50;
 
-	private static final int MAX_LEVEL_BARTER = (int) Math.floor((float) Constants.MARKET_PRICEFACTOR_PERCENT / PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE);
+	public static final int MAX_LEVEL_BARTER = (int) Math.floor((float) Constants.MARKET_PRICEFACTOR_PERCENT / PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE);
 	public static final int MAX_LEVEL_BARKSKIN = 5;
 	public static final int MAX_LEVEL_SPEED = 3;
 	private static final int MAX_LEVEL_EVASION = Math.max(
@@ -138,7 +137,6 @@ public final class SkillCollection {
 	public void initialize() {
 		initializeSkill(new SkillInfo(SkillID.weaponChance, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.offense, null));
 		initializeSkill(new SkillInfo(SkillID.weaponDmg, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.offense, null));
-		initializeSkill(new SkillInfo(SkillID.barter, MAX_LEVEL_BARTER, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
 		initializeSkill(new SkillInfo(SkillID.dodge, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.barkSkin, MAX_LEVEL_BARKSKIN, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requireExperienceLevels(10, 0)
