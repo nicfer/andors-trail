@@ -354,7 +354,6 @@
 
 	<string name="skill_title_weapon_chance">Waffen Präzision</string>
 	<string name="skill_title_weapon_dmg">Kräftiger Schlag</string>
-	<string name="skill_title_barter">Kaufmann</string>
 	<string name="skill_title_dodge">Ausweichen</string>
 	<string name="skill_title_barkskin">Rindenhaut</string>
 	<string name="skill_title_more_criticals">Mehr kritischer Schaden</string>
@@ -364,18 +363,14 @@
 	<string name="skill_title_more_exp">Guter Lehrling</string>
 	<string name="skill_title_cleave">Bresche</string>
 	<string name="skill_title_eater">Leichenesser</string>
-	<string name="skill_title_fortitude">wachsende Standhaftigkeit</string>
 	<string name="skill_title_evasion">Umgehen</string>
 	<string name="skill_title_regeneration">Regeneration</string>
-	<string name="skill_title_lower_exploss">Fehlschläge meistern</string>
-	<string name="skill_title_magicfinder">Magischer Schatzsucher</string>
 	<string name="skill_title_resistance_mental">Starker Verstand</string>
 	<string name="skill_title_resistance_physical_capacity">Ausdauernder Körper</string>
 	<string name="skill_title_resistance_blood_disorder">Reines Blut</string>
 
 	<string name="skill_shortdescription_weapon_chance">Erhöhte Angriffschance</string>
 	<string name="skill_shortdescription_weapon_dmg">Erhöhter Angriffsschaden</string>
-	<string name="skill_shortdescription_barter">Bessere Händlerpreise</string>
 	<string name="skill_shortdescription_dodge">Erhöhte Abwehrchance</string>
 	<string name="skill_shortdescription_barkskin">Schadensresistenz</string>
 	<string name="skill_shortdescription_more_criticals">Erhöhte kritische Fähigkeit</string>
@@ -385,18 +380,14 @@
 	<string name="skill_shortdescription_more_exp">Größere Erfahrung von Gegnern</string>
 	<string name="skill_shortdescription_cleave">Regeneriere Aktionspunkte von besiegten Gegnern</string>
 	<string name="skill_shortdescription_eater">Regeneriere Lebenspunkte von besiegten Gegnern</string>
-	<string name="skill_shortdescription_fortitude">Erlange Leben bei jedem Aufstieg</string>
 	<string name="skill_shortdescription_evasion">Erhöhte Chance zu Fliehen</string>
 	<string name="skill_shortdescription_regeneration">Regeneriere jede Runde Lebenspunkte</string>
-	<string name="skill_shortdescription_lower_exploss">Verringere den Verlust an Erfahrungspunkten beim Sterben</string>
-	<string name="skill_shortdescription_magicfinder">Größere Chance magische Gegenstände zu finden</string>
 	<string name="skill_shortdescription_resistance_mental">Widerstand gegen mentale Effekte</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">Widerstand gegen physische Effekte</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Widerstand gegen Blutstörungen</string>
 
 	<string name="skill_longdescription_weapon_chance">Erhöht die Angriffschance bei jeder Stufe um %1$d.</string>
 	<string name="skill_longdescription_weapon_dmg">Erhöht den maximalen Schaden bei jeder Stufe um %1$d.</string>
-	<string name="skill_longdescription_barter">Verringert bei jeder Stufe den Auf- und Abschlag von An- und Verkäufen um %1$d Prozentpunkte.</string>
 	<string name="skill_longdescription_dodge">Erhöht die Abwehrchance bei jeder Stufe um %1$d.</string>
 	<string name="skill_longdescription_barkskin">Erhöht die Schadensresistenz bei jeder Stufe um %1$d.</string>
 	<string name="skill_longdescription_more_criticals">Erhöht bei jeder Stufe die durch die Ausrüstung bestehende kritische Fähigkeit um %1$d %%.</string>
@@ -406,11 +397,8 @@
 	<string name="skill_longdescription_more_exp">Erhöht bei jeder Stufe die Menge der beim besiegen von Gegnern erhaltenen Erfahrung um %1$d %%.</string>
 	<string name="skill_longdescription_cleave">Für besiegte Gegner erhält man bei jeder Stufe +%1$d Aktionspunkte (AP).</string>
 	<string name="skill_longdescription_eater">Für besiegte Gegner erhält man bei jeder Stufe +%1$d Lebenspunkte (LP).</string>
-	<string name="skill_longdescription_fortitude">Für jeden nachfolgenden Level Aufstieg werden die maximalen Lebenspunkte (LP) um %1$d erhöht. Das wird nicht rückwirkend angewandt, nur nachfolgende Level Aufstiege sind betroffen.</string>
 	<string name="skill_longdescription_evasion">Verringert bei jeder Stufe sowohl die Chance eines fehlgeschlagenen Fluchtversuches um %1$d %% als auch die Chance das ein benachbarter Gegner dich angreift um %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Bei jeder Stufe erhält man pro Runde +%1$d Lebenspunkte (LP) wenn kein Monster auf einem direkt benachbarten Feld ist.</string>
-	<string name="skill_longdescription_lower_exploss">Verringert bei jeder Stufe die Menge der durch den Tod verursachten verlorenen Erfahrung um %1$d %% (prozentualer Anteil an dem bestehenden Erfahrungsverlust, es handelt sich nicht um Prozentpunkte). Durch %2$d Stufen werden alle Erfahrungsverluste, die durch den Tod verursacht werden, entfernt.</string>
-	<string name="skill_longdescription_magicfinder">Erhöht bei jeder Stufe die Chance ungewöhnliche Gegenstände zu finden um %1$d %%.</string>
 	<string name="skill_longdescription_resistance_mental">Verringert bei jeder Stufe die Chance von mentalen Effekten geplagt zu werden um %1$d %%, bis hin zu einem Maximum von %2$d %%. Das beinhaltet von Gegnern hinzugefügte Effekte wie Benommen oder Schwächung der Waffen.</string>
 	<string name="skill_longdescription_resistance_physical_capacity">Verringert bei jeder Stufe die Chance von physischen Effekten geplagt zu werden um %1$d %%, bis hin zu einem Maximum von %2$d %%. Das beinhaltet von Gegnern hinzugefügte Effekte wie Ermüdung.</string>
 	<string name="skill_longdescription_resistance_blood_disorder">Verringert bei jeder Stufe die Chance von Blutstörungen geplagt zu werden um %1$d %%, bis hin zu einem Maximum von %2$d %%. Das beinhaltet von Gegnern hinzugefügte Effekte wie Gift oder Blutende Wunden.</string>

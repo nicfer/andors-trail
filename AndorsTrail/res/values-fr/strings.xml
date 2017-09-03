@@ -347,7 +347,6 @@
 
 	<string name="skill_title_weapon_chance">Précision</string>
 	<string name="skill_title_weapon_dmg">Gros bras</string>
-	<string name="skill_title_barter">Marchandage</string>
 	<string name="skill_title_dodge">Esquive</string>
 	<string name="skill_title_barkskin">Peau de fer</string>
 	<string name="skill_title_more_criticals">Concentration</string>
@@ -357,18 +356,14 @@
 	<string name="skill_title_more_exp">Apprentissage accéléré</string>
 	<string name="skill_title_cleave">Vivacité</string>
 	<string name="skill_title_eater">Charognard</string>
-	<string name="skill_title_fortitude">Constitution améliorée</string>
 	<string name="skill_title_evasion">Évasion</string>
 	<string name="skill_title_regeneration">Régénération</string>
-	<string name="skill_title_lower_exploss">Maîtrise de l\'échec</string>
-	<string name="skill_title_magicfinder">Chercheur de magie</string>
 	<string name="skill_title_resistance_mental">Force mentale</string>
 	<string name="skill_title_resistance_physical_capacity">Endurance physique</string>
 	<string name="skill_title_resistance_blood_disorder">Sang pur</string>
 
 	<string name="skill_shortdescription_weapon_chance">Augmente la probabilité de toucher</string>
 	<string name="skill_shortdescription_weapon_dmg">Augmente les dégâts</string>
-	<string name="skill_shortdescription_barter">Prix d\'achat et de vente plus intéressants</string>
 	<string name="skill_shortdescription_dodge">Augmente la probabilité de bloquer</string>
 	<string name="skill_shortdescription_barkskin">Augmente la résistance aux dégâts</string>
 	<string name="skill_shortdescription_more_criticals">Augmente la probabilité de porter des coups critiques</string>
@@ -378,18 +373,14 @@
 	<string name="skill_shortdescription_more_exp">Les monstres tués rapportent plus d\'expérience</string>
 	<string name="skill_shortdescription_cleave">Permet de récupérer des points d\'action en tuant un monstre</string>
 	<string name="skill_shortdescription_eater">Récupération de points de vie à chaque monstre tué</string>
-	<string name="skill_shortdescription_fortitude">Augmentation des points de vie max. à chaque changement de niveau</string>
 	<string name="skill_shortdescription_evasion">Améliore les chances de s\'enfuir</string>
 	<string name="skill_shortdescription_regeneration">Permet de récupérer des points de vie à chaque tour</string>
-	<string name="skill_shortdescription_lower_exploss">Réduction de la perte d\'expérience en cas de décès</string>
-	<string name="skill_shortdescription_magicfinder">Augmentation de la chance de trouver des objets magiques</string>
 	<string name="skill_shortdescription_resistance_mental">Résistance aux troubles mentaux</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">Résistance aux troubles physiques</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Résistance aux troubles sanguins</string>
 
 	<string name="skill_longdescription_weapon_chance">Chaque niveau de compétence augmente la probabilité de toucher de %1$d.</string>
 	<string name="skill_longdescription_weapon_dmg">Chaque niveau de compétence augmente les dommages max. de %1$d.</string>
-	<string name="skill_longdescription_barter">Chaque niveau de compétence réduit le malus financier d\'achat et de vente de %1$d %%.</string>
 	<string name="skill_longdescription_dodge">Chaque niveau de compétence augmente la chance de bloquer de %1$d.</string>
 	<string name="skill_longdescription_barkskin">Chaque niveau de compétence augmente la résistance aux dégâts de %1$d.</string>
 	<string name="skill_longdescription_more_criticals">Chaque niveau de compétence augmente la probabilité d\'infliger un coup critique de %1$d %%.</string>
@@ -399,11 +390,8 @@
 	<string name="skill_longdescription_more_exp">Chaque niveau de compétence augmente le nombre de points d\'expérience acquis en tuant un monstre de %1$d %%.</string>
 	<string name="skill_longdescription_cleave">Chaque niveau de compétence redonne %1$d points d\'action (AP) pour chaque monstre tué.</string>
 	<string name="skill_longdescription_eater">Chaque niveau de compétence redonne %1$d points de vie (HP) pour chaque monstre tué.</string>
-	<string name="skill_longdescription_fortitude">Chaque changement de niveau ultérieur augmente le nombre maximal de points de vie (HP) de %1$d par niveau de compétence. Ceci n\'est pas appliqué rétroactivement, seuls les changements de niveau ultérieurs sont affectés.</string>
 	<string name="skill_longdescription_evasion">Chaque niveau de compétence réduit la probabilité de ne pas pouvoir fuir de %1$d %%, ainsi que la probabilité qu\'un monstre proche attaque de %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Permet de récupérer +%1$d points de vie (HP) par niveau de compétence à chaque tour.</string>
-	<string name="skill_longdescription_lower_exploss">Chaque niveau de compétence réduit la quantité d\'expérience perdue en cas de décès de %1$d %% (pourcentage relatif à la perte existante et non pourcentage absolu). Le niveau %2$d de ce talent enlève toute perte d\'expérience au décès.</string>
-	<string name="skill_longdescription_magicfinder">Chaque niveau de compétence augmente la probabilité de trouver des objets non-ordinaires de %1$d %%.</string>
 	<string name="skill_longdescription_resistance_mental">Chaque niveau de compétence diminue la probabilité d\'être affecté par des troubles mentaux de %1$d %%, jusqu\'à un maximum de %2$d %%. Cela inclut les troubles causés par les monstres comme Étourdissement ou Maladresse.</string>
 	<string name="skill_longdescription_resistance_physical_capacity">Chaque niveau de compétence diminue la probabilité d\'être affecté par des troubles physiques de %1$d %%, jusqu\'à un maximum de %2$d %%. Ceci inclut les troubles causés par les monstres comme Fatigue.</string>
 	<string name="skill_longdescription_resistance_blood_disorder">Chaque niveau de compétence diminue la probabilité d\'être affecté par des troubles sanguins de %1$d %%, jusqu\'à un maximum de %2$d %%. Ceci inclut les troubles causés par les monstres comme Poison ou Blessures saignantes.</string>

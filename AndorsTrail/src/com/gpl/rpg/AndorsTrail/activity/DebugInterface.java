@@ -12,6 +12,7 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
+import com.gpl.rpg.AndorsTrail.model.map.MapObject;
 
 public final class DebugInterface {
 	private final ControllerContext controllerContext;
@@ -51,34 +52,32 @@ public final class DebugInterface {
 			new DebugButton("items", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("elytharan_redeemer"));
 					world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_shadow0"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("shadow_slayer"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("pot_blind_rage"), 10);
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("clouded_rage"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("pot_fatigue_restore"), 20);
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("quickdagger1"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("calomyran_secrets"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("tail_caverat"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("bwm_leather_cap"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("chaosreaper"));
-
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"),10);
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("club_wood2"),2);
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("rapier_lifesteal"),2);
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("remgard_shield_2"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("haub_serp"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("helm_protector"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("gloves_arulir"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("boots_guard1"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("jewel_fallhaven"));
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_protector"));
 					showToast(mainActivity, "DEBUG: added items", Toast.LENGTH_SHORT);
 				}
 			})
-			/*,new DebugButton("prim", new OnClickListener() {
+			,new DebugButton("prim", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "blackwater_mountain29", "south", 0, 0);
 				}
-			})*/
-			,new DebugButton("exp+=10000", new OnClickListener() {
+			})
+			,new DebugButton("lvlUp", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					int xpToAdd = 10000;
 					if (world.model.player.levelExperience.max > 100000) {
-						xpToAdd = 100000;
+						xpToAdd = (int) Math.pow(10, (int) Math.log10(world.model.player.levelExperience.max));
 					}
 					controllerContext.actorStatsController.addExperience(xpToAdd);
 					showToast(mainActivity, "DEBUG: given " + xpToAdd + " exp", Toast.LENGTH_SHORT);
@@ -101,7 +100,7 @@ public final class DebugInterface {
 					world.model.player.conditions.clear();
 					showToast(mainActivity, "DEBUG: hp set to max", Toast.LENGTH_SHORT);
 				}
-			})
+			})*/
 
 			,new DebugButton("cg", new OnClickListener() {
 				@Override
@@ -114,7 +113,7 @@ public final class DebugInterface {
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "vilegard_s", "tavern", 0, 0);
 				}
-			})
+			})/*
 			,new DebugButton("cr", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -132,14 +131,13 @@ public final class DebugInterface {
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "fallhaven_ne", "clothes", 0, 0);
 				}
-			})
+			})*/
 			,new DebugButton("rc", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "roadtocarntower1", "left3", 0, 0);
 				}
 			})
-			*/
 		});
 	}
 

@@ -310,7 +310,6 @@
 <!-- Should skill titles be translated?（japanese users may stuck when trying to collect information from Forum） -->
 	<string name="skill_title_weapon_chance">正確な攻撃</string>
 	<string name="skill_title_weapon_dmg">強打</string>
-	<string name="skill_title_barter">商人</string>
 	<string name="skill_title_dodge">身交わし</string>
 <!-- Questionable translation: is Bark Skin means "skin like surface of tree"? -->
 	<string name="skill_title_barkskin">樹のような皮膚</string>
@@ -321,18 +320,14 @@
 	<string name="skill_title_more_exp">すばやい習得</string>
 	<string name="skill_title_cleave">一刀両断</string>
 	<string name="skill_title_eater">死体を貪る</string>
-	<string name="skill_title_fortitude">身につけた忍耐</string>
 	<string name="skill_title_evasion">戦いの回避</string>
 	<string name="skill_title_regeneration">再生力</string>
-	<string name="skill_title_lower_exploss">失敗の達人</string>
-	<string name="skill_title_magicfinder">魔法探知機</string>
 	<string name="skill_title_resistance_mental">強い心</string>
 	<string name="skill_title_resistance_physical_capacity">耐える体</string>
 	<string name="skill_title_resistance_blood_disorder">純粋な血</string>
 
 	<string name="skill_shortdescription_weapon_chance">命中率を向上</string>
 	<string name="skill_shortdescription_weapon_dmg">ダメージを強化</string>
-	<string name="skill_shortdescription_barter">店での有利な取引</string>
 	<string name="skill_shortdescription_dodge">回避率の向上</string>
 	<string name="skill_shortdescription_barkskin">ダメージ軽減</string>
 	<string name="skill_shortdescription_more_criticals">クリティカルスキルの向上</string>
@@ -342,18 +337,14 @@
 	<string name="skill_shortdescription_more_exp">モンスターから得る経験値を増加</string>
 	<string name="skill_shortdescription_cleave">モンスターを殺すたびにAPを回復</string>
 	<string name="skill_shortdescription_eater">モンスターを殺すたびにHPを回復</string>
-	<string name="skill_shortdescription_fortitude">レベルアップのたびに最大HPが増加</string>
 	<string name="skill_shortdescription_evasion">逃走の成功率を上昇</string>
 	<string name="skill_shortdescription_regeneration">毎ラウンドHPが回復</string>
-	<string name="skill_shortdescription_lower_exploss">死亡したときの経験値低下を抑える</string>
-	<string name="skill_shortdescription_magicfinder">魔法のアイテムを発見する確率を高める</string>
 	<string name="skill_shortdescription_resistance_mental">精神に対する状態変化への抵抗力</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">身体能力に対する状態変化への抵抗力</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">血液異常への抵抗力</string>
 
 	<string name="skill_longdescription_weapon_chance">スキル1レベルにつき、命中率を %1$d 向上させます。</string>
 	<string name="skill_longdescription_weapon_dmg">スキル1レベルにつき、与えるダメージの最小値と最大値を %1$d 増加させます。</string>
-	<string name="skill_longdescription_barter">スキル1レベルごとに、店でアイテムを買うときに割高にされる比率や、売るときに割安にされる比率を %1$d%% ずつ有利にします。</string>
 	<string name="skill_longdescription_dodge">スキル1レベルにつき、回避率を %1$d 向上させます。</string>
 	<string name="skill_longdescription_barkskin">スキル1レベルにつき、ダメージを %1$d ずつ軽減します。</string>
 	<string name="skill_longdescription_more_criticals">スキル1レベルにつき、装備によるクリティカルスキルを %1$d%% 増加させます。</string>
@@ -363,11 +354,8 @@
 	<string name="skill_longdescription_more_exp">スキル1レベルにつき、モンスターを倒すことで得る経験値を %1$d%% 増加させます。</string>
 	<string name="skill_longdescription_cleave">敵を殺すたび、スキル1レベルにつき +%1$d ポイントの行動値(AP)が回復します。</string>
 	<string name="skill_longdescription_eater">敵を殺すたび、スキル1レベルにつき +%1$d ポイントの体力(HP)が回復します。</string>
-	<string name="skill_longdescription_fortitude">これ以降のレベルアップのたび、体力(HP)の最大値がスキル1レベルにつき %1$d ポイント増加します。過去のレベルアップにさかのぼって適用されることはなく、将来のレベルアップにのみ影響します。</string>
 	<string name="skill_longdescription_evasion">スキル1レベルにつき、逃走に失敗する確率を %1$d%% 、隣接するモンスターから攻撃される確率を %2$d%% ずつ下げる。</string>
 	<string name="skill_longdescription_regeneration">毎ラウンド、スキル1レベルにつきHPを %1$d ずつ回復すます。</string>
-	<string name="skill_longdescription_lower_exploss">スキル1レベルにつき、死亡時に失う経験値の量を %1$d%% 減少させます。(現在失う量に対する割合で、パーセンテージ・ポイントではありません。) %2$d レベルに達すると、死亡時に経験値を失わなくなります。</string>
-	<string name="skill_longdescription_magicfinder">スキル1レベルにつき、特別なアイテムを発見する確率が %1$d%% づつ増加します。</string>
 	<string name="skill_longdescription_resistance_mental">スキル1レベルにつき、精神に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、DazedやWeapon Feeblenessといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
 	<string name="skill_longdescription_resistance_physical_capacity">スキル1レベルにつき、身体能力に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、Fatigueといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
 	<string name="skill_longdescription_resistance_blood_disorder">スキル1レベルにつき、血液異常にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、Poisonやbleeding woundsといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>

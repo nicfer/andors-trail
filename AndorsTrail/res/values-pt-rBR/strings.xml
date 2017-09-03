@@ -352,7 +352,6 @@
 
 	<string name="skill_title_weapon_chance">Precisão de Arma</string>
 	<string name="skill_title_weapon_dmg">Golpe Forte</string>
-	<string name="skill_title_barter">Mercador</string>
 	<string name="skill_title_dodge">Esquivar</string>
 	<string name="skill_title_barkskin">Pele Espessa</string>
 	<string name="skill_title_more_criticals">Mais Ataques Críticos</string>
@@ -362,18 +361,14 @@
 	<string name="skill_title_more_exp">Aprendizagem Rápida</string>
 	<string name="skill_title_cleave">Rasgar</string>
 	<string name="skill_title_eater">Comedor de Corpos</string>
-	<string name="skill_title_fortitude">Força Aumentada</string>
 	<string name="skill_title_evasion">Evasão</string>
 	<string name="skill_title_regeneration">Regeneração</string>
-	<string name="skill_title_lower_exploss">Controle de Falhas</string>
-	<string name="skill_title_magicfinder">Descobridor de Magia</string>
 	<string name="skill_title_resistance_mental">Mente Forte</string>
 	<string name="skill_title_resistance_physical_capacity">Corpo Resistente</string>
 	<string name="skill_title_resistance_blood_disorder">Sangue Puro</string>
 
 	<string name="skill_shortdescription_weapon_chance">Aumento de probabilidade de ataque</string>
 	<string name="skill_shortdescription_weapon_dmg">Aumento de danos em ataque</string>
-	<string name="skill_shortdescription_barter">Melhores preços</string>
 	<string name="skill_shortdescription_dodge">Aumento de probabilidade de bloqueio</string>
 	<string name="skill_shortdescription_barkskin">Resistência a danos</string>
 	<string name="skill_shortdescription_more_criticals">Aumento de probabilidade de ataques críticos</string>
@@ -383,18 +378,14 @@
 	<string name="skill_shortdescription_more_exp">Mais experiência com morte de monstros</string>
 	<string name="skill_shortdescription_cleave">Recupera pontos de acção com cada morte</string>
 	<string name="skill_shortdescription_eater">Recupera pontos de saúde com cada morte</string>
-	<string name="skill_shortdescription_fortitude">Ganho de saúde em cada subida de nível</string>
 	<string name="skill_shortdescription_evasion">Aumento da probabilidade de fuga</string>
 	<string name="skill_shortdescription_regeneration">Ganho de saúde em cada turno</string>
-	<string name="skill_shortdescription_lower_exploss">Diminuição da quantidade de pontos de experiência perdidos ao morrer</string>
-	<string name="skill_shortdescription_magicfinder">Aumento da probabilidade de encontrar objetos mágicos</string>
 	<string name="skill_shortdescription_resistance_mental">Resistência contra encantamentos que incidem sobre a mente</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">Resistência contra encantamentos que incidem sobre a capacidade física</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Resistência contra doenças do sangue</string>
 
 	<string name="skill_longdescription_weapon_chance">Aumenta a probabilidade de ataque em %1$d por cada nível de habilidade.</string>
 	<string name="skill_longdescription_weapon_dmg">Aumenta o dano mínimo e máximo em %1$d por cada nível de habilidade.</string>
-	<string name="skill_longdescription_barter">Por cada nível de habilidade, diminui a penalização monetária de compra e venda em %1$d pontos percentuais.</string>
 	<string name="skill_longdescription_dodge">Aumenta a probabilidade de bloqueio em %1$d por cada nível de habilidade.</string>
 	<string name="skill_longdescription_barkskin">Aumenta a resistência a danos em %1$d por cada nível de habilidade.</string>
 	<string name="skill_longdescription_more_criticals">Aumenta todas as probabilidades de ataque crítico dadas por equipamento em %1$d %% por cada nível de habilidade.</string>
@@ -404,11 +395,8 @@
 	<string name="skill_longdescription_more_exp">Aumenta a quantidade de exp dada por derrotar monstros em %1$d %% por cada nível de habilidade.</string>
 	<string name="skill_longdescription_cleave">Dá +%1$d pontos de acção (AP) em cada morte por cada nível de habilidade.</string>
 	<string name="skill_longdescription_eater">Dá +%1$d pontos de vida (HP) em cada morte por cada nível de habilidade.</string>
-	<string name="skill_longdescription_fortitude">Em cada subida de nível seguinte, o máximo de pontos de vida (HP) será aumentado em %1$d por cada nível de habilidade. Isto não é aplicado retroativamente, apenas as subidas de nível seguintes serão afetadas.</string>
 	<string name="skill_longdescription_evasion">Por cada nível de habilidade, reduz a probabilidade de tentativas de fuga falhadas em %1$d %% e a probabilidade de um monstro numa posição adjacente ataque em %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Ganho de +%1$d pontos de vida (HP) em cada ronda por nível de habilidade.</string>
-	<string name="skill_longdescription_lower_exploss">Por cada nível de habilidade, reduz a quantidade de experiência perdida por morreres em %1$d %% (percentagem do valor atual de perda de exp, não pontos percentuais do valor de exp). %2$d níveis eliminam todas a perda de experiência devido a morte.</string>
-	<string name="skill_longdescription_magicfinder">Aumenta a probabilidade de encontrar objetos fora do normal em %1$d %% por cada nível de habilidade.</string>
 	<string name="skill_longdescription_resistance_mental">Diminui a probabilidade de ser afetado por encantamentos que incidem sobre a mente em %1$d %% por cada nível de habilidade, até ao máximo de %2$d %%. Isto inclui ataques de montros tais como Atordoar (Dazed) ou Enfraquecer Arma (Weapon Feebleness).</string>
 	<string name="skill_longdescription_resistance_physical_capacity">Diminui a probabilidade de ser afetado por encantamentos que incidem sobre a condição física em %1$d %% por cada nível de habilidade, até ao máximo de %2$d %%. Isto inclui ataques de monstros tais como Cansar (Fatigue).</string>
 	<string name="skill_longdescription_resistance_blood_disorder">Diminui a probabilidade de ser afetado por problemas sanguíneos em %1$d %% por cada nível de habilidade, até ao máximo de %2$d %%. Isto inclui ataques de monstros tais como Envenenar (Poison) ou Feridas sangrando (bleeding wounds).</string>
