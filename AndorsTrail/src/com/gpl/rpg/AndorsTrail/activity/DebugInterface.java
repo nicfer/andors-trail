@@ -52,17 +52,19 @@ public final class DebugInterface {
 			new DebugButton("items", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_shadow0"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"),10);
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("club_wood2"),2);
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("rapier_lifesteal"),2);
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("remgard_shield_2"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("haub_serp"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("helm_protector"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("gloves_arulir"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("boots_guard1"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("jewel_fallhaven"));
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_protector"));
+					if (!AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES) {
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_shadow0"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"), 10);
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("club_wood2"), 2);
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("rapier_lifesteal"), 2);
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("remgard_shield_2"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("haub_serp"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("helm_protector"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("gloves_arulir"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("boots_guard1"));
+						world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_protector"));
+					}
+					world.model.player.inventory.addItem(world.itemTypes.getItemType("jewel_fallhaven_dr"));
 					showToast(mainActivity, "DEBUG: added items", Toast.LENGTH_SHORT);
 				}
 			})
