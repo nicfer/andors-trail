@@ -18,6 +18,7 @@ public final class SkillCollection {
 		,betterCriticals
 		,speed				// Raises max ap
 		,coinfinder
+		,moreCoins
 		,moreExp
 		,cleave				// +10ap on kill
 		,eater				// +1hp per kill
@@ -151,6 +152,9 @@ public final class SkillCollection {
 			SkillLevelRequirement.requireExperienceLevels(INCREASE_SPEED_EACH_N_LVLS, 0)
 		}));
 		initializeSkill(new SkillInfo(SkillID.coinfinder, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
+		initializeSkill(new SkillInfo(SkillID.moreCoins, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, new SkillLevelRequirement[] {
+				SkillLevelRequirement.requireOtherSkill(SkillID.coinfinder, 1)
+		}));
 		initializeSkill(new SkillInfo(SkillID.moreExp, MAX_LEVEL_MORE_EXP, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
 		initializeSkill(new SkillInfo(SkillID.cleave, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.offense, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requireOtherSkill(SkillID.weaponChance, 1)

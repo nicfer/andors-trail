@@ -368,6 +368,7 @@
 	<string name="skill_title_better_criticals">Better Criticals</string>
 	<string name="skill_title_speed">Combat Speed</string>
 	<string name="skill_title_coinfinder">Treasure Hunter</string>
+	<string name="skill_title_morecoins">Bulk Shopper</string>
 	<string name="skill_title_more_exp">Quick Learner</string>
 	<string name="skill_title_cleave">Cleave</string>
 	<string name="skill_title_eater">Corpse Eater</string>
@@ -385,6 +386,7 @@
 	<string name="skill_shortdescription_better_criticals">Increased critical damage</string>
 	<string name="skill_shortdescription_speed">Increased maximum action points</string>
 	<string name="skill_shortdescription_coinfinder">Higher chance of finding gold and magic items, and enhances shop prices</string>
+	<string name="skill_shortdescription_morecoins">Enhances shop bulk prices</string>
 	<string name="skill_shortdescription_more_exp">More experience from monster kills and less experience loss</string>
 	<string name="skill_shortdescription_cleave">Recover action points on every kill</string>
 	<string name="skill_shortdescription_eater">Recover health points on every kill</string>
@@ -402,6 +404,7 @@
 	<string name="skill_longdescription_better_criticals">Increases any existing critical multiplier given by equipment by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level. At max level, increases 1 AP each %2$d levels</string>
 	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to %3$d%% of the amount the monster drops). Also, increases the chance of finding non-ordinary items by %4$d %% for every skill level, and decreases the buying and selling gold penalty by %5$d percentage points.</string>
+	<string name="skill_longdescription_morecoins">Decreases the buying and selling on bulk gold penalty by %1$d percentage points.</string>
 	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level and reduces experience lost by %2$d %%.</string>
 	<string name="skill_longdescription_cleave">Gives +%1$d action points (AP) on every kill per skill level.</string>
 	<string name="skill_longdescription_eater">Gives +%1$d health points (HP) on every kill per skill level.</string>

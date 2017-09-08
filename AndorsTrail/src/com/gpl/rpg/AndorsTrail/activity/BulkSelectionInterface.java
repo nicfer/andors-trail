@@ -21,6 +21,7 @@ import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
+import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 
 /**
@@ -249,6 +250,25 @@ public final class BulkSelectionInterface extends Activity implements TextWatche
 		timedEventHandler.postDelayed(countEvent, repeatAfterInterval);
 	}
 
+	private int getTotCost() {
+		int amount = getTextboxAmount();
+		return amount * pricePerUnit;
+	}
+
+	private int getDiscount() {
+		int discount = world.model.player.getSkillLevel(SkillCollection.SkillID.moreCoins)
+				* SkillCollection.PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE;
+		return getTotCost() * discount / 100;
+	}
+
+	private int totalSellingCost() {
+		return getTotCost() + getDiscount();
+	}
+
+	private int totalBuyingCost() {
+		return getTotCost() - getDiscount();
+	}
+
 	private boolean canSelectFinalizeButton() {
 		int amount = getTextboxAmount();
 		if (amount <= 0) return false;
@@ -276,9 +296,11 @@ public final class BulkSelectionInterface extends Activity implements TextWatche
 
 		// display buying/selling information if not dropping
 		if (interfaceType == BulkInterfaceType.buy) {
-			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_buy, newAmount * pricePerUnit));
+			bulkselection_summary_totalgold.setText(getResources().getString(
+					R.string.bulkselection_totalcost_buy, totalBuyingCost()));
 		} else if (interfaceType == BulkInterfaceType.sell) {
-			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_sell, newAmount * pricePerUnit));
+			bulkselection_summary_totalgold.setText(getResources().getString(
+					R.string.bulkselection_totalcost_sell, totalSellingCost()));
 		}
 
 		okButton.setEnabled(canSelectFinalizeButton());
