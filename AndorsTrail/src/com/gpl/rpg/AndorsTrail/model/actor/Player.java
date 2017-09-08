@@ -51,13 +51,12 @@ public final class Player extends Actor {
 		public int iconID;
 		public int maxAP;
 		public int maxHP;
-		public int hpPerLvl;
-		public int hpFrags;
 		public int moveCost;
 		public int attackCost;
 		public int attackChance;
 		public int criticalSkill;
 		public float criticalMultiplier;
+		public float criticalResist;
 		public final Range damagePotential = new Range();
 		public int blockChance;
 		public int damageResistance;
@@ -74,6 +73,7 @@ public final class Player extends Actor {
 		this.attackChance = this.baseTraits.attackChance;
 		this.criticalSkill = this.baseTraits.criticalSkill;
 		this.criticalMultiplier = this.baseTraits.criticalMultiplier;
+		this.criticalResist = this.baseTraits.criticalResist;
 		this.damagePotential.set(this.baseTraits.damagePotential);
 		this.blockChance = this.baseTraits.blockChance;
 		this.damageResistance = this.baseTraits.damageResistance;
@@ -96,13 +96,12 @@ public final class Player extends Actor {
 		baseTraits.iconID = TileManager.CHAR_HERO;
 		baseTraits.maxAP = 10;
 		baseTraits.maxHP = 25;
-		baseTraits.hpPerLvl = 0;
-		baseTraits.hpFrags = 0;
 		baseTraits.moveCost = 6;
 		baseTraits.attackCost = DEFAULT_PLAYER_ATTACKCOST;
 		baseTraits.attackChance = 60;
 		baseTraits.criticalSkill = 0;
 		baseTraits.criticalMultiplier = 1;
+		baseTraits.criticalResist= 0;
 		baseTraits.damagePotential.set(1, 1);
 		baseTraits.blockChance = 0;
 		baseTraits.damageResistance = 0;
@@ -282,8 +281,6 @@ public final class Player extends Actor {
 		if (fileversion <= 33) /*this.tileSize = */new Size(src, fileversion);
 		this.baseTraits.maxAP = src.readInt();
 		this.baseTraits.maxHP = src.readInt();
-		this.baseTraits.hpPerLvl = src.readInt();
-		this.baseTraits.hpFrags = src.readInt();
 		this.name = src.readUTF();
 		this.moveCost = src.readInt();
 
@@ -295,6 +292,7 @@ public final class Player extends Actor {
 		} else {
 			this.baseTraits.criticalMultiplier = src.readFloat();
 		}
+		this.baseTraits.criticalResist = src.readInt();
 		this.baseTraits.damagePotential.readFromParcel(src, fileversion);
 		this.baseTraits.blockChance = src.readInt();
 		this.baseTraits.damageResistance = src.readInt();
@@ -369,14 +367,13 @@ public final class Player extends Actor {
 		dest.writeInt(baseTraits.iconID);
 		dest.writeInt(baseTraits.maxAP);
 		dest.writeInt(baseTraits.maxHP);
-		dest.writeInt(baseTraits.hpPerLvl);
-		dest.writeInt(baseTraits.hpFrags);
 		dest.writeUTF(name);
 		dest.writeInt(moveCost); // TODO: Should we really write this?
 		dest.writeInt(baseTraits.attackCost);
 		dest.writeInt(baseTraits.attackChance);
 		dest.writeInt(baseTraits.criticalSkill);
 		dest.writeFloat(baseTraits.criticalMultiplier);
+		dest.writeFloat(baseTraits.criticalResist);
 		baseTraits.damagePotential.writeToParcel(dest);
 		dest.writeInt(baseTraits.blockChance);
 		dest.writeInt(baseTraits.damageResistance);

@@ -28,6 +28,7 @@ public class Actor {
 	public int attackCost;
 	public int attackChance;
 	public int criticalSkill;
+	public float criticalResist;
 	public float criticalMultiplier;
 	public final Range damagePotential = new Range();
 	public int blockChance;
@@ -59,6 +60,7 @@ public class Actor {
 	public int getAttackCost() { return attackCost; }
 	public int getAttackChance() { return attackChance; }
 	public int getCriticalSkill() { return criticalSkill; }
+	public float getCriticalResist() { return criticalResist; }
 	public float getCriticalMultiplier() { return criticalMultiplier; }
 	public Range getDamagePotential() { return damagePotential; }
 	public int getBlockChance() { return blockChance; }
