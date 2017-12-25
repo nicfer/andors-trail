@@ -108,6 +108,7 @@ public final class SkillInfoActivity extends Activity {
 		switch (skill) {
 		case weaponChance: return R.string.skill_title_weapon_chance;
 		case weaponDmg: return R.string.skill_title_weapon_dmg;
+		case barter: return R.string.skill_title_barter;
 		case dodge: return R.string.skill_title_dodge;
 		case barkSkin: return R.string.skill_title_barkskin;
 		case moreCriticals: return R.string.skill_title_more_criticals;
@@ -117,8 +118,11 @@ public final class SkillInfoActivity extends Activity {
 		case moreExp: return R.string.skill_title_more_exp;
 		case cleave: return R.string.skill_title_cleave;
 		case eater: return R.string.skill_title_eater;
+		case fortitude: return R.string.skill_title_fortitude;
 		case evasion: return R.string.skill_title_evasion;
 		case regeneration: return R.string.skill_title_regeneration;
+		case lowerExploss: return R.string.skill_title_lower_exploss;
+		case magicfinder: return R.string.skill_title_magicfinder;
 		case resistanceMental: return R.string.skill_title_resistance_mental;
 		case resistancePhysical: return R.string.skill_title_resistance_physical_capacity;
 		case resistanceBlood: return R.string.skill_title_resistance_blood_disorder;
@@ -152,18 +156,22 @@ public final class SkillInfoActivity extends Activity {
 	private static String getSkillLongDescription(final SkillCollection.SkillID skill, final Resources res) {
 		switch (skill) {
 		case weaponChance: return res.getString(R.string.skill_longdescription_weapon_chance, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE);
-		case weaponDmg: return res.getString(R.string.skill_longdescription_weapon_dmg, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX);
+		case weaponDmg: return res.getString(R.string.skill_longdescription_weapon_dmg, SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX);
+		case barter: return res.getString(R.string.skill_longdescription_barter, SkillCollection.PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE);
 		case dodge: return res.getString(R.string.skill_longdescription_dodge, SkillCollection.PER_SKILLPOINT_INCREASE_DODGE);
-		case barkSkin: return res.getString(R.string.skill_longdescription_barkskin, SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN, SkillCollection.INCREASE_BARKSKIN_EACH_N_BLOCK);
+		case barkSkin: return res.getString(R.string.skill_longdescription_barkskin, SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN);
 		case moreCriticals: return res.getString(R.string.skill_longdescription_more_criticals, SkillCollection.PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT);
 		case betterCriticals: return res.getString(R.string.skill_longdescription_better_criticals, SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT);
-		case speed: return res.getString(R.string.skill_longdescription_speed, SkillCollection.PER_SKILLPOINT_INCREASE_SPEED, SkillCollection.INCREASE_SPEED_EACH_N_LVLS);
-		case coinfinder: return res.getString(R.string.skill_longdescription_coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_QUANTITY_PERCENT, SkillCollection.MAX_COINFINDER_ADD_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_BARTER_PRICEFACTOR_PERCENTAGE);
-		case moreExp: return res.getString(R.string.skill_longdescription_more_exp, SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT);
+		case speed: return res.getString(R.string.skill_longdescription_speed, SkillCollection.PER_SKILLPOINT_INCREASE_SPEED);
+		case coinfinder: return res.getString(R.string.skill_longdescription_coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_QUANTITY_PERCENT);
+		case moreExp: return res.getString(R.string.skill_longdescription_more_exp, SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT);
 		case cleave: return res.getString(R.string.skill_longdescription_cleave, SkillCollection.PER_SKILLPOINT_INCREASE_CLEAVE_AP);
 		case eater: return res.getString(R.string.skill_longdescription_eater, SkillCollection.PER_SKILLPOINT_INCREASE_EATER_HEALTH);
+		case fortitude: return res.getString(R.string.skill_longdescription_fortitude, SkillCollection.PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH);
 		case evasion: return res.getString(R.string.skill_longdescription_evasion, SkillCollection.PER_SKILLPOINT_INCREASE_EVASION_FLEE_CHANCE_PERCENTAGE, SkillCollection.PER_SKILLPOINT_INCREASE_EVASION_MONSTER_ATTACK_CHANCE_PERCENTAGE);
 		case regeneration: return res.getString(R.string.skill_longdescription_regeneration, SkillCollection.PER_SKILLPOINT_INCREASE_REGENERATION);
+		case lowerExploss: return res.getString(R.string.skill_longdescription_lower_exploss, SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT, SkillCollection.MAX_LEVEL_LOWER_EXPLOSS);
+		case magicfinder: return res.getString(R.string.skill_longdescription_magicfinder, SkillCollection.PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT);
 		case resistanceMental: return res.getString(R.string.skill_longdescription_resistance_mental, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT * SkillCollection.MAX_LEVEL_RESISTANCE);
 		case resistancePhysical: return res.getString(R.string.skill_longdescription_resistance_physical_capacity, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT * SkillCollection.MAX_LEVEL_RESISTANCE);
 		case resistanceBlood: return res.getString(R.string.skill_longdescription_resistance_blood_disorder, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT, SkillCollection.PER_SKILLPOINT_INCREASE_RESISTANCE_CHANCE_PERCENT * SkillCollection.MAX_LEVEL_RESISTANCE);

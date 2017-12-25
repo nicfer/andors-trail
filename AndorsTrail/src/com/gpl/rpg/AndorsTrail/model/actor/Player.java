@@ -56,7 +56,6 @@ public final class Player extends Actor {
 		public int attackChance;
 		public int criticalSkill;
 		public float criticalMultiplier;
-		public float criticalResist;
 		public final Range damagePotential = new Range();
 		public int blockChance;
 		public int damageResistance;
@@ -73,7 +72,6 @@ public final class Player extends Actor {
 		this.attackChance = this.baseTraits.attackChance;
 		this.criticalSkill = this.baseTraits.criticalSkill;
 		this.criticalMultiplier = this.baseTraits.criticalMultiplier;
-		this.criticalResist = this.baseTraits.criticalResist;
 		this.damagePotential.set(this.baseTraits.damagePotential);
 		this.blockChance = this.baseTraits.blockChance;
 		this.damageResistance = this.baseTraits.damageResistance;
@@ -101,7 +99,6 @@ public final class Player extends Actor {
 		baseTraits.attackChance = 60;
 		baseTraits.criticalSkill = 0;
 		baseTraits.criticalMultiplier = 1;
-		baseTraits.criticalResist= 0;
 		baseTraits.damagePotential.set(1, 1);
 		baseTraits.blockChance = 0;
 		baseTraits.damageResistance = 0;
@@ -162,10 +159,8 @@ public final class Player extends Actor {
 	}
 
 	public void recalculateLevelExperience() {
-		int discount = getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT;
 		int experienceRequiredToReachThisLevel = getRequiredExperience(level);
-		levelExperience.set(getRequiredExperienceForNextLevel(level) * (100 - discount) / 100,// - discountExp,
-				totalExperience - experienceRequiredToReachThisLevel);
+		levelExperience.set(getRequiredExperienceForNextLevel(level), totalExperience - experienceRequiredToReachThisLevel);
 	}
 
 	private static int getRequiredExperience(int currentLevel) {
@@ -175,8 +170,9 @@ public final class Player extends Actor {
 		}
 		return v;
 	}
+	private static final int EXP_base = 55;
 	private static int getRequiredExperienceForNextLevel(int currentLevel) {
-		return (int) (Constants.LEVELUP_SPEED_FACTOR * currentLevel * currentLevel);
+		return (int) (EXP_base * currentLevel * currentLevel);
 	}
 
 	public boolean canLevelup() {
@@ -292,7 +288,6 @@ public final class Player extends Actor {
 		} else {
 			this.baseTraits.criticalMultiplier = src.readFloat();
 		}
-		this.baseTraits.criticalResist = src.readInt();
 		this.baseTraits.damagePotential.readFromParcel(src, fileversion);
 		this.baseTraits.blockChance = src.readInt();
 		this.baseTraits.damageResistance = src.readInt();
@@ -310,6 +305,13 @@ public final class Player extends Actor {
 			final int numConditions = src.readInt();
 			for(int i = 0; i < numConditions; ++i) {
 				this.conditions.add(new ActorCondition(src, world, fileversion));
+			}
+		}
+
+		if (fileversion >= 43) {
+			final int numConditions = src.readInt();
+			for(int i = 0; i < numConditions; ++i) {
+				this.immunities.add(new ActorCondition(src, world, fileversion));
 			}
 		}
 
@@ -373,7 +375,6 @@ public final class Player extends Actor {
 		dest.writeInt(baseTraits.attackChance);
 		dest.writeInt(baseTraits.criticalSkill);
 		dest.writeFloat(baseTraits.criticalMultiplier);
-		dest.writeFloat(baseTraits.criticalResist);
 		baseTraits.damagePotential.writeToParcel(dest);
 		dest.writeInt(baseTraits.blockChance);
 		dest.writeInt(baseTraits.damageResistance);
@@ -384,6 +385,10 @@ public final class Player extends Actor {
 		position.writeToParcel(dest);
 		dest.writeInt(conditions.size());
 		for (ActorCondition c : conditions) {
+			c.writeToParcel(dest);
+		}
+		dest.writeInt(immunities.size());
+		for (ActorCondition c : immunities) {
 			c.writeToParcel(dest);
 		}
 		lastPosition.writeToParcel(dest);

@@ -50,7 +50,7 @@ public final class LevelUpActivity extends Activity {
 				levelup(ActorStatsController.LevelUpSelection.health);
 			}
 		});
-		b.setText(getString(R.string.levelup_add_health, Constants.LEVELUP_EFFECT_HP_PER_LVL));
+		b.setText(getString(R.string.levelup_add_health, Constants.LEVELUP_EFFECT_HEALTH));
 
 		b = (Button) findViewById(R.id.levelup_add_attackchance);
 		b.setOnClickListener(new OnClickListener() {

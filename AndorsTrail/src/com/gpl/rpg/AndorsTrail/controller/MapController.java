@@ -121,7 +121,7 @@ public final class MapController {
 		controllers.combatController.exitCombat(false);
 		final Player player = world.model.player;
 		int lostExp = player.getCurrentLevelExperience() * Constants.PERCENT_EXP_LOST_WHEN_DIED / 100;
-		lostExp -= lostExp * player.getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT / 100;
+		lostExp -= lostExp * player.getSkillLevel(SkillCollection.SkillID.lowerExploss) * SkillCollection.PER_SKILLPOINT_INCREASE_EXPLOSS_PERCENT / 100;
 
 		if (lostExp < 0) lostExp = 0;
 		controllers.actorStatsController.addExperience(-lostExp);
@@ -184,7 +184,15 @@ public final class MapController {
 			for(ReplaceableMapSection replacement : tileMap.replacements) {
 				if (replacement.isApplied) continue;
 				if (!satisfiesCondition(replacement)) continue;
+				else ConversationController.requirementFulfilled(world, replacement.requirement);
 				tileMap.applyReplacement(replacement);
+				for (ReplaceableMapSection impactedReplacement : tileMap.replacements) {
+					if (impactedReplacement.isApplied && impactedReplacement.replacementArea.intersects(replacement.replacementArea)) {
+						//The applied replacement has overwritten changes made by a previously applied replacement.
+						//This previous replacement must now be considered as unapplied to let it be reapplied later eventually.
+						impactedReplacement.isApplied = false;
+					}
+				}
 				hasUpdated = true;
 			}
 		}
@@ -200,7 +208,7 @@ public final class MapController {
 	}
 
 	public boolean satisfiesCondition(ReplaceableMapSection replacement) {
-		return world.model.player.hasExactQuestProgress(replacement.requireQuestStage);
+		return ConversationController.canFulfillRequirement(world, replacement.requirement);
 	}
 
 	private final ConversationController.ConversationStatemachine.ConversationStateListener conversationStateListener = new ConversationController.ConversationStatemachine.ConversationStateListener() {

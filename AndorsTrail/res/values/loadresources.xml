@@ -20,7 +20,6 @@
 		<item>@raw/itemlist_armour</item>
 		<item>@raw/itemlist_rings</item>
 		<item>@raw/itemlist_necklaces</item>
-		<item>@raw/itemlist_necklaces_more</item>
 		<item>@raw/itemlist_junk</item>
 		<item>@raw/itemlist_food</item>
 		<item>@raw/itemlist_potions</item>
@@ -82,6 +81,7 @@
 
 	<array name="loadresource_conversationlists">
 		<item>@raw/conversationlist_mikhail</item>
+		<item>@raw/conversationlist_mikhail_foodpoison</item>
 		<item>@raw/conversationlist_crossglen</item>
 		<item>@raw/conversationlist_crossglen_gruil</item>
 		<item>@raw/conversationlist_crossglen_leonid</item>

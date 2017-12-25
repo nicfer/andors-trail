@@ -113,6 +113,7 @@ public final class SkillListAdapter extends ArrayAdapter<SkillInfo> {
 		switch (skill) {
 		case weaponChance: return R.string.skill_shortdescription_weapon_chance;
 		case weaponDmg: return R.string.skill_shortdescription_weapon_dmg;
+		case barter: return R.string.skill_shortdescription_barter;
 		case dodge: return R.string.skill_shortdescription_dodge;
 		case barkSkin: return R.string.skill_shortdescription_barkskin;
 		case moreCriticals: return R.string.skill_shortdescription_more_criticals;
@@ -122,8 +123,11 @@ public final class SkillListAdapter extends ArrayAdapter<SkillInfo> {
 		case moreExp: return R.string.skill_shortdescription_more_exp;
 		case cleave: return R.string.skill_shortdescription_cleave;
 		case eater: return R.string.skill_shortdescription_eater;
+		case fortitude: return R.string.skill_shortdescription_fortitude;
 		case evasion: return R.string.skill_shortdescription_evasion;
 		case regeneration: return R.string.skill_shortdescription_regeneration;
+		case lowerExploss: return R.string.skill_shortdescription_lower_exploss;
+		case magicfinder: return R.string.skill_shortdescription_magicfinder;
 		case resistanceMental: return R.string.skill_shortdescription_resistance_mental;
 		case resistancePhysical: return R.string.skill_shortdescription_resistance_physical_capacity;
 		case resistanceBlood: return R.string.skill_shortdescription_resistance_blood_disorder;

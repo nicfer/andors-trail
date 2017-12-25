@@ -2,6 +2,7 @@ package com.gpl.rpg.AndorsTrail.controller;
 
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.listeners.CombatActionListeners;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionEffect;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionType;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
@@ -20,6 +21,8 @@ import com.gpl.rpg.AndorsTrail.util.ConstRange;
 public final class SkillController {
 	private final ControllerContext controllers;
 	private final WorldContext world;
+	public final CombatActionListeners combatActionListeners = new CombatActionListeners();
+	
 
 	public SkillController(ControllerContext controllers, WorldContext world) {
 		this.controllers = controllers;
@@ -27,37 +30,20 @@ public final class SkillController {
 	}
 
 	public void applySkillEffects(Player player) {
-		player.attackChance += player.attackChance * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE
-				* player.getSkillLevel(SkillID.weaponChance) / 100;
-		player.damagePotential.addToMax(player.damagePotential.max * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX
-				* player.getSkillLevel(SkillID.weaponDmg) / 100);
-		player.damagePotential.add(player.damagePotential.current * SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN
-				* player.getSkillLevel(SkillID.weaponDmg) / 100, false);
-		player.blockChance += player.blockChance * SkillCollection.PER_SKILLPOINT_INCREASE_DODGE
-				* player.getSkillLevel(SkillID.dodge) / 100;
-		if (player.getSkillLevel(SkillID.barkSkin) >= SkillCollection.MAX_LEVEL_BARKSKIN) {
-			player.damageResistance += player.blockChance / (SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN
-										* SkillCollection.INCREASE_BARKSKIN_EACH_N_BLOCK);
-		} else {
-			player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin);
-		}
+		player.attackChance += SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE * player.getSkillLevel(SkillID.weaponChance);
+		player.damagePotential.addToMax(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX * player.getSkillLevel(SkillID.weaponDmg));
+		player.damagePotential.add(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN * player.getSkillLevel(SkillID.weaponDmg), false);
+		player.blockChance += SkillCollection.PER_SKILLPOINT_INCREASE_DODGE * player.getSkillLevel(SkillID.dodge);
+		player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin);
 		if (player.hasCriticalSkillEffect()) {
 			if (player.criticalSkill > 0) {
 				player.criticalSkill += player.criticalSkill * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT * player.getSkillLevel(SkillID.moreCriticals) / 100;
 			}
 		}
 		if (player.hasCriticalMultiplierEffect()) {
-			player.criticalMultiplier += player.criticalMultiplier
-					* SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT
-					* player.getSkillLevel(SkillID.betterCriticals) / 100;
+			player.criticalMultiplier += player.criticalMultiplier * SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT * player.getSkillLevel(SkillID.betterCriticals) / 100;
 		}
-		if (player.getSkillLevel(SkillID.speed) >= SkillCollection.MAX_LEVEL_SPEED) {
-			controllers.actorStatsController.addActorMaxAP(player, player.level
-					/ SkillCollection.INCREASE_SPEED_EACH_N_LVLS, false);
-		} else {
-			controllers.actorStatsController.addActorMaxAP(player,
-					SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed), false);
-		}
+		controllers.actorStatsController.addActorMaxAP(player, SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed), false);
 		/*final int berserkLevel = player.getSkillLevel(Skills.SKILL_BERSERKER);
 		if (berserkLevel > 0) {
 			final int berserkHealth = player.health.max * Skills.BERSERKER_STARTS_AT_HEALTH_PERCENT / 100;
@@ -76,7 +62,7 @@ public final class SkillController {
 		if (ItemTypeCollection.isGoldItemType(item.itemType.id)) {
 			return getRollBias(item, player, SkillID.coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT);
 		} else if (!item.itemType.isOrdinaryItem()) {
-			return getRollBias(item, player, SkillID.coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT);
+			return getRollBias(item, player, SkillID.magicfinder, SkillCollection.PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT);
 		} else {
 			return 0;
 		}
@@ -201,6 +187,7 @@ public final class SkillController {
 	public void applySkillEffectsFromMonsterAttack(AttackResult result, Monster monster) {
 		if (!result.isHit) {
 			if (rollForSkillChance(world.model.player, SkillID.taunt, SkillCollection.PER_SKILLPOINT_INCREASE_TAUNT_CHANCE)) {
+				combatActionListeners.onPlayerTauntsMonster(monster);
 				controllers.actorStatsController.changeActorAP(monster, -SkillCollection.TAUNT_AP_LOSS, false, false);
 			}
 		}
@@ -347,7 +334,8 @@ public final class SkillController {
 					playerTraits.criticalMultiplier = Math.max(mainHandItem.effects_equip.stats.setCriticalMultiplier, getPercentage(offHandItem.effects_equip.stats.setCriticalMultiplier, SkillCollection.DUALWIELD_EFFICIENCY_LEVEL2, 0));
 				} else if (skillLevelFightStyle == 1) {
 					percent = SkillCollection.DUALWIELD_EFFICIENCY_LEVEL1;
-					playerTraits.attackCost = attackCostMainHand + getPercentage(attackCostOffHand, SkillCollection.DUALWIELD_LEVEL1_OFFHAND_AP_COST_PERCENT, 0);
+					//Take into account the case where the worst weapon AP-wise is in the off-hand.
+					playerTraits.attackCost = Math.max(attackCostMainHand, attackCostOffHand) + getPercentage( Math.min(attackCostMainHand, attackCostOffHand), SkillCollection.DUALWIELD_LEVEL1_OFFHAND_AP_COST_PERCENT, 0);
 					playerTraits.criticalMultiplier = Math.max(mainHandItem.effects_equip.stats.setCriticalMultiplier, getPercentage(offHandItem.effects_equip.stats.setCriticalMultiplier, SkillCollection.DUALWIELD_EFFICIENCY_LEVEL1, 0));
 				} else {
 					percent = SkillCollection.DUALWIELD_EFFICIENCY_LEVEL0;

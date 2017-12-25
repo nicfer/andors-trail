@@ -18,6 +18,7 @@ import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
+import com.gpl.rpg.AndorsTrail.model.item.ItemTraits_OnHitReceived;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTraits_OnUse;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
 import com.gpl.rpg.AndorsTrail.model.map.MonsterSpawnArea;
@@ -55,9 +56,14 @@ public final class CombatController implements VisualEffectCompletedCallback {
 	public void exitCombat(boolean pickupLootBags) {
 		setCombatSelection(null, null);
 		world.model.uiSelections.isInCombat = false;
+		combatTurnListeners.onCombatEnded();
 		world.model.uiSelections.selectedPosition = null;
 		world.model.uiSelections.selectedMonster = null;
-		endOfCombatRound();
+		if (world.model.player.isDead()) {
+			controllers.gameRoundController.resetRoundTimers();
+		} else {
+			endOfCombatRound();
+		}
 		if (pickupLootBags && totalExpThisFight > 0) {
 			controllers.itemController.lootMonsterBags(killedMonsterBags, totalExpThisFight);
 		} else {
@@ -203,6 +209,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		totalExpThisFight += loot.exp;
 		loot.exp = 0;
 		controllers.actorStatsController.applyKillEffectsToPlayer(player);
+		controllers.actorStatsController.applyOnDeathEffectsToPlayer(player, killedMonster);
 
 		if (!loot.hasItemsOrGold()) {
 			world.model.currentMap.removeGroundLoot(loot);
@@ -531,16 +538,14 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		if (!Constants.roll100(hitChance)) return AttackResult.MISS;
 
 		int damage = Constants.rollValue(attacker.getDamagePotential());
-		boolean isCriticalHit = Constants.roll100(attacker.getEffectiveCriticalChance());
-		float critMult = 1;
-		if (isCriticalHit) {
-			critMult = attacker.getCriticalMultiplier();
-			if (!hasCriticalAttack(attacker, target)) {
-				critMult = Math.max(critMult-1,1);
+		boolean isCriticalHit = false;
+		if (hasCriticalAttack(attacker, target)) {
+			isCriticalHit = Constants.roll100(attacker.getEffectiveCriticalChance());
+			if (isCriticalHit) {
+				damage *= attacker.getCriticalMultiplier();
 			}
-			damage = (int) (damage * critMult);
 		}
-		damage = (int) (damage - target.getDamageResistance() * critMult);
+		damage -= target.getDamageResistance();
 		if (damage < 0) damage = 0;
 		controllers.actorStatsController.removeActorHealth(target, damage);
 
@@ -551,15 +556,20 @@ public final class CombatController implements VisualEffectCompletedCallback {
 
 	private void applyAttackHitStatusEffects(Actor attacker, Actor target) {
 		ItemTraits_OnUse[] onHitEffects = attacker.getOnHitEffects();
-		if (onHitEffects == null) return;
-
-		for (ItemTraits_OnUse e : onHitEffects) {
-			controllers.actorStatsController.applyUseEffect(attacker, target, e);
+		ItemTraits_OnHitReceived[] onHitReceivedEffects = target.getOnHitReceivedEffects();
+		if (onHitEffects != null) {
+			for (ItemTraits_OnUse e : onHitEffects) {
+				controllers.actorStatsController.applyUseEffect(attacker, target, e);
+			}
+		}
+		if (onHitReceivedEffects != null) {
+			for (ItemTraits_OnHitReceived e : onHitReceivedEffects) {
+				controllers.actorStatsController.applyHitReceivedEffect(target, attacker, e);
+			}
 		}
 	}
 
 	public void endOfCombatRound() {
-		combatTurnListeners.onCombatEnded();
 		world.model.worldData.tickWorldTime();
 		controllers.gameRoundController.resetRoundTimers();
 		controllers.actorStatsController.applyConditionsToPlayer(world.model.player, false);

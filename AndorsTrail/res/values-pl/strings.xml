@@ -332,6 +332,7 @@
 
 	<string name="skill_title_weapon_chance">Celny cios</string>
 	<string name="skill_title_weapon_dmg">Potężny cios</string>
+	<string name="skill_title_barter">Kupiec</string>
 	<string name="skill_title_dodge">Unik</string>
 	<string name="skill_title_barkskin">Zdrewniała skóra</string>
 	<string name="skill_title_more_criticals">Częstsze ciosy krytyczne</string>
@@ -341,14 +342,18 @@
 	<string name="skill_title_more_exp">Dobry uczeń</string>
 	<string name="skill_title_cleave">Rozłupanie</string>
 	<string name="skill_title_eater">Zjadacz ciał</string>
+	<string name="skill_title_fortitude">Zwiększony hart</string>
 	<string name="skill_title_evasion">Odskok</string>
 	<string name="skill_title_regeneration">Regeneracja</string>
+	<string name="skill_title_lower_exploss">Mistrz Upadków</string>
+	<string name="skill_title_magicfinder">Poszukiwacz artefaktów</string>
 	<string name="skill_title_resistance_mental">Silny umysł</string>
 	<string name="skill_title_resistance_physical_capacity">Wytrzymałe ciało</string>
 	<string name="skill_title_resistance_blood_disorder">Czysta krew</string>
 
 	<string name="skill_shortdescription_weapon_chance">Zwiększa szansę trafienia.</string>
 	<string name="skill_shortdescription_weapon_dmg">Zwiększa zadawane obrażenia.</string>
+	<string name="skill_shortdescription_barter">Lepsze ceny w sklepach.</string>
 	<string name="skill_shortdescription_dodge">Zwiększa szansę bloku.</string>
 	<string name="skill_shortdescription_barkskin">Odporność na obrażenia.</string>
 	<string name="skill_shortdescription_more_criticals">Zwiększa umiejętność zadawania ciosów krytycznych.</string>
@@ -358,14 +363,18 @@
 	<string name="skill_shortdescription_more_exp">Zwiększa liczbę punktów doświadczenia uzyskiwaną z zabicia przeciwnika.</string>
 	<string name="skill_shortdescription_cleave">Zabicie przeciwnika przywraca Punkty Akcji (PA).</string>
 	<string name="skill_shortdescription_eater">Zabicie przeciwnika przywraca punkty życia (PŻ).</string>
+	<string name="skill_shortdescription_fortitude">Podnosi Punkty Życia (PŻ) przy awansie na kolejny poziom.</string>
 	<string name="skill_shortdescription_evasion">Zwiększa szansę na udaną ucieczkę.</string>
 	<string name="skill_shortdescription_regeneration">Przywraca Punkty Życia (PŻ) w każdej rundzie.</string>
+	<string name="skill_shortdescription_lower_exploss">Obniża liczbę punktów doświadczenia traconych w wyniku śmierci.</string>
+	<string name="skill_shortdescription_magicfinder">Zwiększa szansę na znalezienie magicznych przedmiotów.</string>
 	<string name="skill_shortdescription_resistance_mental">Zwiększa odporność na umysłowe efekty ataku.</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">Zwiększa odporność na fizyczne efekty ataku.</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Zwiększa odporność na choroby krwi.</string>
 
 	<string name="skill_longdescription_weapon_chance">Zwiększa szansę trafienia o %1$d procent na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_weapon_dmg">Zwiększa zadawane obrażenia o %1$d na każdy poziom umiejętności.</string>
+	<string name="skill_longdescription_barter">Obniża różnicę pomiędzy ceną zakupu a ceną sprzedaży o %1$d procent na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_dodge">Zwiększa szansę bloku o %1$d procent na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_barkskin">Zwiększa odporność na obrażenia o %1$d na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_more_criticals">Zwiększa umiejętność ciosu krytycznego dawaną przez ekwipunek o %1$d %% na każdy poziom umiejętności.</string>
@@ -375,8 +384,11 @@
 	<string name="skill_longdescription_more_exp">Zwiększa liczbę punktów doświadczenia uzyskiwaną z zabicia przeciwnika o %1$d %% na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_cleave">Po każdym zabiciu przeciwnika dodaje +%1$d punktów akcji (PA) na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_eater">Po każdym zabiciu przeciwnika dodaje +%1$d punktów życia (PŻ) na każdy poziom umiejętności.</string>
+	<string name="skill_longdescription_fortitude">Z każdym awansem na kolejny poziom, maksymalny poziom punktów życia (PŻ) będzie zwiększany o %1$d na każdy poziom umiejętności. Umiejętność nie działa wstecz, a tylko od następnego awansu.</string>
 	<string name="skill_longdescription_evasion">Na każdy poziom umiejętności, redukuje szansę na nieudaną ucieczkę o %1$d %% oraz szansę że przeciwnik zaatakuje w trakcie ucieczki o %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Przywraca +%1$d punktów życia (PŻ) każdej rundy na każdy poziom umiejętności, o ile tylko na przyległym polu nie znajduje się przeciwnik.</string>
+	<string name="skill_longdescription_lower_exploss">Na każdy poziom umiejętności, redukuje liczbę punktów doświadczenia traconych w wyniku śmierci o %1$d %% (procent z traconej liczby punktów doświadczenia).Poziom %2$d usuwa w ogóle utratę punktów doświadczenia w wyniku śmierci.</string>
+	<string name="skill_longdescription_magicfinder">Zwiększa szansę znalezienia niezwykłych przedmiotów o %1$d %% na każdy poziom umiejętności.</string>
 	<string name="skill_longdescription_resistance_mental">Obniża szansę bycia dotkniętym umysłowymi efektami ataku (takimi jak np. Oszołomienie, Słabość broni) o %1$d %% na każdy poziom umiejętności, aż do maksimum wynoszącego %2$d %%.</string>
 	<string name="skill_longdescription_resistance_physical_capacity">Obniża szansę bycia dotkniętym przez fizyczne efekty ataku (takimi jak Zmęczenie) o %1$d %% na każdy poziom umiejętności, aż do maksimum wynoszącego %2$d %%.</string>
 	<string name="skill_longdescription_resistance_blood_disorder">Obniża szansę bycia dotkniętym przez choroby krwi (takimi jak np Trucizna, Krwawiące rany) o %1$d %% na każdy poziom umiejętności, aż do maksimum wynoszącego %2$d %%. .</string>

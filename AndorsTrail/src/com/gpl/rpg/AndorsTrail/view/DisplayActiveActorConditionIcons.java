@@ -1,7 +1,13 @@
 package com.gpl.rpg.AndorsTrail.view;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.GradientDrawable.Orientation;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -10,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -18,9 +25,6 @@ import com.gpl.rpg.AndorsTrail.controller.listeners.ActorConditionListener;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorCondition;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 public final class DisplayActiveActorConditionIcons implements ActorConditionListener {
 
@@ -31,6 +35,8 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 	private final RelativeLayout activeConditions;
 	private final ArrayList<ActiveConditionIcon> currentConditionIcons = new ArrayList<ActiveConditionIcon>();
 	private final WeakReference<Context> androidContext;
+	
+	private Actor target;
 
 	public DisplayActiveActorConditionIcons(
 			final ControllerContext controllers,
@@ -44,19 +50,25 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 		this.androidContext = new WeakReference<Context>(androidContext);
 		this.activeConditions = activeConditions;
 	}
+	
+	public void setTarget(Actor target) {
+		if (this.target == target) return;
+		this.target = target;
+		cleanUp();
+	}
 
 	@Override
 	public void onActorConditionAdded(Actor actor, ActorCondition condition) {
-		if (actor != world.model.player) return;
+		if (actor != target) return;
 		ActiveConditionIcon icon = getFirstFreeIcon();
-		icon.setActiveCondition(condition);
+		icon.setActiveCondition(condition, false);
 		icon.show();
 	}
 
 	@Override
 	public void onActorConditionRemoved(Actor actor, ActorCondition condition) {
-		if (actor != world.model.player) return;
-		ActiveConditionIcon icon = getIconFor(condition);
+		if (actor != target) return;
+		ActiveConditionIcon icon = getIconFor(condition, false);
 		if (icon == null) return;
 		icon.hide(true);
 	}
@@ -67,35 +79,66 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 
 	@Override
 	public void onActorConditionMagnitudeChanged(Actor actor, ActorCondition condition) {
-		if (actor != world.model.player) return;
-		ActiveConditionIcon icon = getIconFor(condition);
+		if (actor != target) return;
+		ActiveConditionIcon icon = getIconFor(condition, false);
 		if (icon == null) return;
 		icon.setIconText();
 	}
 
 	@Override
 	public void onActorConditionRoundEffectApplied(Actor actor, ActorCondition condition) {
-		if (actor != world.model.player) return;
-		ActiveConditionIcon icon = getIconFor(condition);
+		if (actor != target) return;
+		ActiveConditionIcon icon = getIconFor(condition, false);
 		if (icon == null) return;
 		icon.pulseAnimate();
 	}
 
+
+	@Override
+	public void onActorConditionImmunityAdded(Actor actor, ActorCondition condition) {
+		if (actor != target) return;
+		ActiveConditionIcon icon = getFirstFreeIcon();
+		icon.setActiveCondition(condition, true);
+		icon.show();
+	}
+
+	@Override
+	public void onActorConditionImmunityRemoved(Actor actor, ActorCondition condition) {
+		if (actor != target) return;
+		ActiveConditionIcon icon = getIconFor(condition, true);
+		if (icon == null) return;
+		icon.hide(true);
+	}
+
+	@Override
+	public void onActorConditionImmunityDurationChanged(Actor actor, ActorCondition condition) {
+	}
+	
 	public void unsubscribe() {
 		controllers.actorStatsController.actorConditionListeners.remove(this);
 		for (ActiveConditionIcon icon : currentConditionIcons) icon.condition = null;
 	}
 
 	public void subscribe() {
-		for (ActiveConditionIcon icon : currentConditionIcons) icon.hide(false);
-		for (ActorCondition condition : world.model.player.conditions) {
-			getFirstFreeIcon().setActiveCondition(condition);
-		}
+		cleanUp();
 		controllers.actorStatsController.actorConditionListeners.add(this);
+	}
+	
+	private void cleanUp() {
+		for (ActiveConditionIcon icon : currentConditionIcons) icon.hide(false);
+		if (target != null) {
+			for (ActorCondition condition : target.conditions) {
+				getFirstFreeIcon().setActiveCondition(condition, false);
+			}
+			for (ActorCondition condition : target.immunities) {
+				getFirstFreeIcon().setActiveCondition(condition, true);
+			}
+		}
 	}
 
 	private final class ActiveConditionIcon implements AnimationListener {
 		public final int id;
+		private boolean immunity = false;
 		public ActorCondition condition;
 		public final ImageView image;
 		public final TextView text;
@@ -108,6 +151,9 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 			this.id = id;
 			this.image = new ImageView(context);
 			this.image.setId(id);
+			GradientDrawable grad = new GradientDrawable(target == world.model.player ? Orientation.BOTTOM_TOP : Orientation.TOP_BOTTOM, new int[]{Color.argb(190, 68, 68, 68), Color.argb(10, 34, 34, 34)});
+			grad.setCornerRadius(3);
+			this.image.setBackgroundDrawable(grad);
 			this.text = new TextView(context);
 			this.onNewIconAnimation = AnimationUtils.loadAnimation(context, R.anim.scaleup);
 			this.onRemovedIconAnimation = AnimationUtils.loadAnimation(context, R.anim.scaledown);
@@ -120,15 +166,16 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 			text.setShadowLayer(1, 1, 1, res.getColor(android.R.color.black));
 		}
 
-		private void setActiveCondition(ActorCondition condition) {
+		private void setActiveCondition(ActorCondition condition, boolean immunity) {
+			this.immunity = immunity;
 			this.condition = condition;
-			tileManager.setImageViewTile(res, image, condition.conditionType);
+			tileManager.setImageViewTile(res, image, condition.conditionType, immunity);
 			image.setVisibility(View.VISIBLE);
 			setIconText();
 		}
 
 		public void setIconText() {
-			boolean showMagnitude = (condition.magnitude != 1);
+			boolean showMagnitude = (condition.magnitude != 1 && condition.magnitude != ActorCondition.MAGNITUDE_REMOVE_ALL);
 			if (showMagnitude) {
 				text.setText(Integer.toString(condition.magnitude));
 				text.setVisibility(View.VISIBLE);
@@ -186,9 +233,9 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 		}
 	}
 
-	private ActiveConditionIcon getIconFor(ActorCondition condition) {
+	private ActiveConditionIcon getIconFor(ActorCondition condition, boolean immunity) {
 		for (ActiveConditionIcon icon : currentConditionIcons) {
-			if (icon.condition == condition) return icon;
+			if (icon.condition == condition && icon.immunity == immunity) return icon;
 		}
 		return null;
 	}
@@ -201,7 +248,8 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 
 	private RelativeLayout.LayoutParams getLayoutParamsForIconIndex(int index) {
 		RelativeLayout.LayoutParams layout = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		if (target == world.model.player) layout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		else layout.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 		if (index == 0) {
 			layout.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 		} else {

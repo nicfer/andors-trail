@@ -25,6 +25,7 @@
 	<string name="dialog_monsterencounter_title">Encounter</string>
 	<string name="dialog_monsterencounter_message">Do you want to attack?\nDifficulty: %1$s</string>
 	<string name="dialog_monsterencounter_info">Info</string>
+	<string name="dialog_monsterencounter_conditions">Conditions</string>
 
 	<string name="status_hp">HP:</string>
 	<string name="status_ap">AP:</string>
@@ -68,6 +69,14 @@
 	<string name="combat_not_enough_ap">Not enough AP left this round.</string>
 	<string name="combat_hero_dies">You fall unconscious, but fortunately wake up alive, dazed and fatigued. You lost %1$d experience.</string>
 	<string name="combat_miss_animation_message">MISS</string>
+	<string name="combat_taunt_monster">You taunt %1$s!</string>
+	<string name="combat_condition_player_apply">You are affected by %1$s.</string>
+	<string name="combat_condition_player_clear">You are cleared of %1$s.</string>
+	<string name="combat_condition_player_immune">You are now immunized against %1$s.</string>
+	<string name="combat_condition_monster_apply">%1$s is affected by %2$s.</string>
+	<string name="combat_condition_monster_clear">%1$s is cleared of %2$s.</string>
+	<string name="combat_condition_monster_immune">%1$s is now immunized against %2$s.</string>
+	
 	
 	<string name="inventory_info">Info</string>
 	<string name="inventory_equip">Equip</string>
@@ -298,16 +307,20 @@
 
 	<string name="actorinfo_currentconditions">Active conditions</string> <!-- Translated as: affliction / statuseffect / temporary effect -->
 	<string name="actorcondition_info_removes_all">Removes all %1$s</string>
+	<string name="actorcondition_info_immunity">Immune to %1$s</string>
 	<string name="iteminfo_effect_chance_of">%1$s chance of %2$s</string>
 	<string name="iteminfo_effect_duration">(%1$d rounds)</string>
 
 	<string name="iteminfo_effect_works_on_source">On source</string>
 	<string name="iteminfo_effect_works_on_target">On target</string>
+	<string name="iteminfo_effect_works_on_attacker">On attacker</string>
 	<string name="iteminfo_effect_works_when_hitting_target">When hitting target</string>
 	<string name="iteminfo_effect_works_when_killing_target">On every kill</string>
 	<string name="iteminfo_effect_works_when_used">When used</string>
 	<string name="iteminfo_effect_works_when_equipped">When equipped</string>
-
+	<string name="iteminfo_effect_works_when_hit_by_attacker">When hit by attacker</string>
+	<string name="iteminfo_effect_works_when_killed_by_attacker">When killed by attacker</string>
+	
 	<string name="iteminfo_effect_decrease_current_hp">Drains %1$s HP</string>
 	<string name="iteminfo_effect_increase_current_hp">Restores %1$s HP</string>
 	<string name="iteminfo_effect_decrease_current_ap">Drains %1$s AP</string>
@@ -362,54 +375,63 @@
 
 	<string name="skill_title_weapon_chance">Weapon Accuracy</string>
 	<string name="skill_title_weapon_dmg">Hard Hit</string>
+	<string name="skill_title_barter">Merchant</string>
 	<string name="skill_title_dodge">Dodge</string>
 	<string name="skill_title_barkskin">Bark Skin</string>
 	<string name="skill_title_more_criticals">More Criticals</string>
 	<string name="skill_title_better_criticals">Better Criticals</string>
 	<string name="skill_title_speed">Combat Speed</string>
 	<string name="skill_title_coinfinder">Treasure Hunter</string>
-	<string name="skill_title_morecoins">Bulk Shopper</string>
 	<string name="skill_title_more_exp">Quick Learner</string>
 	<string name="skill_title_cleave">Cleave</string>
 	<string name="skill_title_eater">Corpse Eater</string>
+	<string name="skill_title_fortitude">Increased Fortitude</string>
 	<string name="skill_title_evasion">Evasion</string>
 	<string name="skill_title_regeneration">Regeneration</string>
+	<string name="skill_title_lower_exploss">Failure Mastery</string>
+	<string name="skill_title_magicfinder">Magic Finder</string>
 	<string name="skill_title_resistance_mental">Strong Mind</string>
 	<string name="skill_title_resistance_physical_capacity">Enduring Body</string>
 	<string name="skill_title_resistance_blood_disorder">Pure Blood</string>
 
-	<string name="skill_shortdescription_weapon_chance">More attack chance</string>
-	<string name="skill_shortdescription_weapon_dmg">More attack damage</string>
-	<string name="skill_shortdescription_dodge">More block chance</string>
+	<string name="skill_shortdescription_weapon_chance">Increased attack chance</string>
+	<string name="skill_shortdescription_weapon_dmg">Increased attack damage</string>
+	<string name="skill_shortdescription_barter">Better shop prices</string>
+	<string name="skill_shortdescription_dodge">Increased block chance</string>
 	<string name="skill_shortdescription_barkskin">Damage resistance</string>
 	<string name="skill_shortdescription_more_criticals">Increased critical skill</string>
 	<string name="skill_shortdescription_better_criticals">Increased critical damage</string>
 	<string name="skill_shortdescription_speed">Increased maximum action points</string>
-	<string name="skill_shortdescription_coinfinder">Higher chance of finding gold and magic items, and enhances shop prices</string>
-	<string name="skill_shortdescription_morecoins">Enhances shop bulk prices</string>
-	<string name="skill_shortdescription_more_exp">More experience from monster kills and less experience loss</string>
+	<string name="skill_shortdescription_coinfinder">Higher chance of finding gold</string>
+	<string name="skill_shortdescription_more_exp">More experience from monster kills</string>
 	<string name="skill_shortdescription_cleave">Recover action points on every kill</string>
 	<string name="skill_shortdescription_eater">Recover health points on every kill</string>
+	<string name="skill_shortdescription_fortitude">Gain health on each level up</string>
 	<string name="skill_shortdescription_evasion">Increased chance of fleeing</string>
 	<string name="skill_shortdescription_regeneration">Gain health every round</string>
+	<string name="skill_shortdescription_lower_exploss">Decrease amount of lost experience when dying</string>
+	<string name="skill_shortdescription_magicfinder">Increased chance of finding magic items</string>
 	<string name="skill_shortdescription_resistance_mental">Resistance against mental conditions</string>
 	<string name="skill_shortdescription_resistance_physical_capacity">Resistance against physical capacity conditions</string>
 	<string name="skill_shortdescription_resistance_blood_disorder">Resistance against blood disorders</string>
 
-	<string name="skill_longdescription_weapon_chance">Multiplies attack chance by %1$d%% for each skill level.</string>
-	<string name="skill_longdescription_weapon_dmg">Multiplies min damage by %1$d%% and max damage by %2$d%% for each skill level.</string>
-	<string name="skill_longdescription_dodge">Multiplies block chance by %1$d%% for each skill level.</string>
-	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level. At max level, gives 1 damage resistance per %2$d block chance</string>
+	<string name="skill_longdescription_weapon_chance">Increases attack chance by %1$d percentage points for each skill level.</string>
+	<string name="skill_longdescription_weapon_dmg">Increases max damage by %1$d for each skill level.</string>
+	<string name="skill_longdescription_barter">For every skill level, decreases the buying and selling gold penalty by %1$d percentage points.</string>
+	<string name="skill_longdescription_dodge">Increases block chance by %1$d percentage points for each skill level.</string>
+	<string name="skill_longdescription_barkskin">Increases damage resistance by %1$d for each skill level.</string>
 	<string name="skill_longdescription_more_criticals">Increases any existing critical skill given by equipment by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_better_criticals">Increases any existing critical multiplier given by equipment by %1$d %% for each skill level.</string>
-	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level. At max level, increases 1 AP each %2$d levels</string>
-	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to %3$d%% of the amount the monster drops). Also, increases the chance of finding non-ordinary items by %4$d %% for every skill level, and decreases the buying and selling gold penalty by %5$d percentage points.</string>
-	<string name="skill_longdescription_morecoins">Decreases the buying and selling on bulk gold penalty by %1$d percentage points.</string>
-	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level and reduces experience lost by %2$d %%.</string>
+	<string name="skill_longdescription_speed">Increases maximum action points (AP) by %1$d for each skill level.</string>
+	<string name="skill_longdescription_coinfinder">Increases chance of finding gold in monster drops by %1$d %%, and increases amount of gold in drops by %2$d %% for each skill level (up to the maximum amount that the monster drops).</string>
+	<string name="skill_longdescription_more_exp">Increases amount of exp given by defeating monsters by %1$d %% for each skill level.</string>
 	<string name="skill_longdescription_cleave">Gives +%1$d action points (AP) on every kill per skill level.</string>
 	<string name="skill_longdescription_eater">Gives +%1$d health points (HP) on every kill per skill level.</string>
+	<string name="skill_longdescription_fortitude">On every subsequent level-up, maximum health points (HP) will be raised by %1$d per skill level. This is not applied retroactively, only subsequent level-ups will be affected.</string>
 	<string name="skill_longdescription_evasion">For every skill level, reduces both the chance of failed flee attempts by %1$d %% and the chance that an adjacent monster will attack by %2$d %%.</string>
 	<string name="skill_longdescription_regeneration">Gain +%1$d health points (HP) on every round per skill level when no monsters are directly adjacent.</string>
+	<string name="skill_longdescription_lower_exploss">For every skill level, reduces the amount of lost experience caused by death by %1$d %% (percentage of existing exp loss value, not percentage points). %2$d levels will remove all experience loss caused by death.</string>
+	<string name="skill_longdescription_magicfinder">Increases the chance of finding non-ordinary items by %1$d %% for every skill level.</string>
 	<string name="skill_longdescription_resistance_mental">Lowers the chance of being afflicted with mental conditions by %1$d %% for every skill level, up to a maximum of %2$d %%. This includes conditions caused by monster attacks such as Dazed or Weapon Feebleness.</string>
 	<string name="skill_longdescription_resistance_physical_capacity">Lowers the chance of being afflicted with conditions affecting your physical capacity by %1$d %% for every skill level, up to a maximum of %2$d %%. This includes conditions caused by monster attacks such as Fatigue.</string>
 	<string name="skill_longdescription_resistance_blood_disorder">Lowers the chance of being afflicted with disorders of the blood by %1$d %% for every skill level, up to a maximum of %2$d %%. This includes conditions caused by monster attacks such as Poison or bleeding wounds.</string>
@@ -581,7 +603,7 @@
 
 Without this skill, only %1$d %% of a weapon\'s qualities may be used when equipped in the off-hand. This includes attack chance, critical skill, damage potential and block chance. Without this skill, attack speed (AP cost) of making an attack is the sum of the attack speed of the main weapon and that of the weapon used in the off-hand.
 
-With one level of this skill, %2$d %% of the off-hand\'s weapon\'s qualities may be used, and the attack speed is the attack speed of the weapon in the main hand plus %3$d %% of the attack speed of the weapon in the off-hand.
+With one level of this skill, %2$d %% of the off-hand\'s weapon\'s qualities may be used, and the attack speed is the highest attack speed of both weapons plus %3$d %% of the lowest attack speed of both weapons.
 
 With two levels of this skill, %4$d %% of the off-hand\'s weapon\'s qualities may be used, and the attack speed equals the highest of the attack speeds of the two equipped weapons."</string>
 	<string name="skill_longdescription_fightstyle_2hand">"Gives benefits when using weapons that require both hands to wield, such as two-handed swords, greataxes or giant hammers.

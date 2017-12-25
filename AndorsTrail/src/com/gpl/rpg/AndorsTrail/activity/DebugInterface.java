@@ -11,8 +11,8 @@ import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
-import com.gpl.rpg.AndorsTrail.model.map.MapObject;
 
 public final class DebugInterface {
 	private final ControllerContext controllerContext;
@@ -29,62 +29,59 @@ public final class DebugInterface {
 
 	public void addDebugButtons() {
 		if (!AndorsTrailApplication.DEVELOPMENT_DEBUGBUTTONS) return;
-		if (!world.model.player.getName().startsWith("debug")) return;
 
 		addDebugButtons(new DebugButton[] {
-			/*new DebugButton("dmg", new OnClickListener() {
+			new DebugButton("dmg", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.damagePotential.max += 500;
-					world.model.player.damagePotential.current += 500;
-					world.model.player.attackChance += 500;
+					world.model.player.damagePotential.set(500, 500);
+					world.model.player.attackChance = 500;
+					world.model.player.attackCost = 1;
 					showToast(mainActivity, "DEBUG: damagePotential=500, chance=500%, cost=1", Toast.LENGTH_SHORT);
 				}
 			})
-			,new DebugButton("dmg=1", new OnClickListener() {
+			/*,new DebugButton("dmg=1", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					world.model.player.damagePotential.set(1, 1);
 					showToast(mainActivity, "DEBUG: damagePotential=1", Toast.LENGTH_SHORT);
 				}
-			})
-			,*/
-			new DebugButton("items", new OnClickListener() {
+			})*/
+			,new DebugButton("items", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					if (!AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES) {
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_shadow0"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"), 10);
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("club_wood2"), 2);
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("rapier_lifesteal"), 2);
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("remgard_shield_2"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("haub_serp"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("helm_protector"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("gloves_arulir"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("boots_guard1"));
-						world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_protector"));
+					for (ItemType type : world.itemTypes.UNITTEST_getAllItemTypes().values()) {
+						world.model.player.inventory.addItem(type, 10);
 					}
-					world.model.player.inventory.addItem(world.itemTypes.getItemType("jewel_fallhaven_dr"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("elytharan_redeemer"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("ring_shadow0"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("shadow_slayer"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("pot_blind_rage"), 10);
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("clouded_rage"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("pot_fatigue_restore"), 20);
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("quickdagger1"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("bonemeal_potion"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("calomyran_secrets"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("tail_caverat"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("bwm_leather_cap"));
+//					world.model.player.inventory.addItem(world.itemTypes.getItemType("chaosreaper"));
+
 					showToast(mainActivity, "DEBUG: added items", Toast.LENGTH_SHORT);
 				}
 			})
-			,new DebugButton("prim", new OnClickListener() {
+			/*,new DebugButton("prim", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "blackwater_mountain29", "south", 0, 0);
 				}
-			})
-			,new DebugButton("lvlUp", new OnClickListener() {
+			})*/
+			/*,new DebugButton("exp+=10000", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					int xpToAdd = 10000;
-					if (world.model.player.levelExperience.max > 100000) {
-						xpToAdd = (int) Math.pow(10, (int) Math.log10(world.model.player.levelExperience.max));
-					}
-					controllerContext.actorStatsController.addExperience(xpToAdd);
-					showToast(mainActivity, "DEBUG: given " + xpToAdd + " exp", Toast.LENGTH_SHORT);
+					controllerContext.actorStatsController.addExperience(10000);
+					showToast(mainActivity, "DEBUG: given 10000 exp", Toast.LENGTH_SHORT);
 				}
-			})
+			})*/
 			,new DebugButton("reset", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -94,16 +91,24 @@ public final class DebugInterface {
 					showToast(mainActivity, "DEBUG: maps respawned", Toast.LENGTH_SHORT);
 				}
 			})
-			/*,new DebugButton("hp", new OnClickListener() {
+			,new DebugButton("hp", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
-					world.model.player.health.max += 500;
+					world.model.player.baseTraits.maxHP = 500;
+					world.model.player.health.max = world.model.player.baseTraits.maxHP;
 					controllerContext.actorStatsController.setActorMaxHealth(world.model.player);
 					world.model.player.conditions.clear();
 					showToast(mainActivity, "DEBUG: hp set to max", Toast.LENGTH_SHORT);
 				}
-			})*/
-
+			})
+			,new DebugButton("skill", new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					world.model.player.availableSkillIncreases += 10;
+					showToast(mainActivity, "DEBUG: 10 skill points", Toast.LENGTH_SHORT);
+				}
+			})
+			/*
 			,new DebugButton("cg", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -115,7 +120,7 @@ public final class DebugInterface {
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "vilegard_s", "tavern", 0, 0);
 				}
-			})/*
+			})
 			,new DebugButton("cr", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
@@ -133,13 +138,14 @@ public final class DebugInterface {
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "fallhaven_ne", "clothes", 0, 0);
 				}
-			})*/
+			})
 			,new DebugButton("rc", new OnClickListener() {
 				@Override
 				public void onClick(View arg0) {
 					controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "roadtocarntower1", "left3", 0, 0);
 				}
 			})
+			*/
 		});
 	}
 

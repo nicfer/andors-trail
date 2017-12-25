@@ -1,17 +1,17 @@
 package com.gpl.rpg.AndorsTrail.activity;
 
+import java.lang.ref.WeakReference;
+import java.util.Collection;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.*;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,20 +29,26 @@ import com.gpl.rpg.AndorsTrail.controller.listeners.CombatActionListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatTurnListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.WorldEventListener;
+import com.gpl.rpg.AndorsTrail.model.ability.ActorCondition;
+import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionEffect;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
-import com.gpl.rpg.AndorsTrail.model.item.ItemContainer.ItemEntry;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
 import com.gpl.rpg.AndorsTrail.model.map.MapObject;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
 import com.gpl.rpg.AndorsTrail.util.Coord;
-import com.gpl.rpg.AndorsTrail.view.*;
-import com.gpl.rpg.AndorsTrail.view.QuickButton.QuickButtonContextMenuInfo;
-
-import java.lang.ref.WeakReference;
-import java.util.Collection;
+import com.gpl.rpg.AndorsTrail.view.CombatView;
+import com.gpl.rpg.AndorsTrail.view.DisplayActiveActorConditionIcons;
+import com.gpl.rpg.AndorsTrail.view.ItemContainerAdapter;
+import com.gpl.rpg.AndorsTrail.view.MainView;
+import com.gpl.rpg.AndorsTrail.view.QuickButton;
+import com.gpl.rpg.AndorsTrail.view.QuickitemView;
+import com.gpl.rpg.AndorsTrail.view.QuickslotsItemContainerAdapter;
+import com.gpl.rpg.AndorsTrail.view.StatusView;
+import com.gpl.rpg.AndorsTrail.view.ToolboxView;
+import com.gpl.rpg.AndorsTrail.view.VirtualDpadView;
 
 public final class MainActivity
 		extends Activity
@@ -88,6 +94,7 @@ public final class MainActivity
 		combatview = (CombatView) findViewById(R.id.main_combatview);
 		quickitemview = (QuickitemView) findViewById(R.id.main_quickitemview);
 		activeConditions = new DisplayActiveActorConditionIcons(controllers, world, this, (RelativeLayout) findViewById(R.id.statusview_activeconditions));
+		activeConditions.setTarget(world.model.player);
 		VirtualDpadView dpad = (VirtualDpadView) findViewById(R.id.main_virtual_dpad);
 		toolboxview = (ToolboxView) findViewById(R.id.main_toolboxview);
 		statusview.registerToolboxViews(toolboxview, quickitemview);
@@ -191,6 +198,8 @@ public final class MainActivity
 		controllers.movementController.playerMovementListeners.remove(this);
 		controllers.combatController.combatActionListeners.remove(this);
 		controllers.combatController.combatTurnListeners.remove(this);
+		controllers.actorStatsController.combatActionListeners.remove(this);
+		controllers.skillController.combatActionListeners.remove(this);
 		controllers.mapController.worldEventListeners.remove(this);
 	}
 
@@ -198,6 +207,8 @@ public final class MainActivity
 		controllers.mapController.worldEventListeners.add(this);
 		controllers.combatController.combatTurnListeners.add(this);
 		controllers.combatController.combatActionListeners.add(this);
+		controllers.actorStatsController.combatActionListeners.add(this);
+		controllers.skillController.combatActionListeners.add(this);
 		controllers.movementController.playerMovementListeners.add(this);
 		statusview.subscribe();
 		quickitemview.subscribe();
@@ -492,6 +503,69 @@ public final class MainActivity
 	@Override
 	public void onPlayerDoesNotHaveEnoughAP() {
 		message(getString(R.string.combat_not_enough_ap));
+	}
+	
+	@Override
+	public void onPlayerTauntsMonster(Monster attacker) {
+		message(getString(R.string.combat_taunt_monster, attacker.getName()));
+	}
+	
+	@Override
+	public void onPlayerReceviesActorCondition(ActorConditionEffect effect) {
+		StringBuilder sb = new StringBuilder();
+		if (effect.isImmunity()) {
+			sb.append(effect.conditionType.name);
+		} else if (effect.isRemovalEffect()) {
+			sb.append(effect.conditionType.name);
+		} else {
+			sb.append(effect.conditionType.name);
+			if (effect.magnitude > 1) {
+				sb.append(" x");
+				sb.append(effect.magnitude);
+			}
+		}
+		if (ActorCondition.isTemporaryEffect(effect.duration)) {
+			sb.append(' ');
+			sb.append(getString(R.string.iteminfo_effect_duration, effect.duration));
+		}
+		String msg = sb.toString();
+
+		if (effect.isImmunity()) {
+			message(getString(R.string.combat_condition_player_immune, msg));
+		} else if (effect.isRemovalEffect()) {
+			message(getString(R.string.combat_condition_player_clear, msg));
+		} else {
+			message(getString(R.string.combat_condition_player_apply, msg));
+		}
+	}
+	
+	@Override
+	public void onMonsterReceivesActorCondition(ActorConditionEffect effect, Monster target) {
+		StringBuilder sb = new StringBuilder();
+		if (effect.isImmunity()) {
+			sb.append(effect.conditionType.name);
+		} else if (effect.isRemovalEffect()) {
+			sb.append(effect.conditionType.name);
+		} else {
+			sb.append(effect.conditionType.name);
+			if (effect.magnitude > 1) {
+				sb.append(" x");
+				sb.append(effect.magnitude);
+			}
+		}
+		if (ActorCondition.isTemporaryEffect(effect.duration)) {
+			sb.append(' ');
+			sb.append(getString(R.string.iteminfo_effect_duration, effect.duration));
+		}
+		String msg = sb.toString();
+
+		if (effect.isImmunity()) {
+			message(getString(R.string.combat_condition_monster_immune, target.getName(), msg));
+		} else if (effect.isRemovalEffect()) {
+			message(getString(R.string.combat_condition_monster_clear, target.getName(), msg));
+		} else {
+			message(getString(R.string.combat_condition_monster_apply, target.getName(), msg));
+		}
 	}
 
 }

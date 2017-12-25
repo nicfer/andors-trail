@@ -50,6 +50,8 @@ public final class Monster extends Actor {
 		this.blockChance = monsterType.blockChance;
 		this.damageResistance = monsterType.damageResistance;
 		this.onHitEffects = monsterType.onHitEffects;
+		this.onHitReceivedEffects = monsterType.onHitReceivedEffects;
+		this.onDeathEffects = monsterType.onDeathEffects;
 	}
 
 	public DropList getDropList() { return monsterType.dropList; }
@@ -62,6 +64,7 @@ public final class Monster extends Actor {
 
 	public void createLoot(Loot container, Player player) {
 		int exp = this.getExp();
+		exp += exp * player.getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT / 100;
 		container.exp += exp;
 		DropList dropList = getDropList();
 		if (dropList == null) return;
