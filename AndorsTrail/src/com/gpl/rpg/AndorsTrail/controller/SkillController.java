@@ -29,12 +29,23 @@ public final class SkillController {
 		this.world = world;
 	}
 
+	/*private int applyDamageResistance(Player player) {
+		int drPerBSLvl = SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN
+			* (SkillCollection.MAX_LEVEL_BARKSKIN - player.getSkillLevel(SkillID.barkSkin));
+		 return (int) Math.max(
+			SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin)
+			,player.blockChance / drPerBSLvl);
+	}*/
+
 	public void applySkillEffects(Player player) {
-		player.attackChance += SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE * player.getSkillLevel(SkillID.weaponChance);
-		player.damagePotential.addToMax(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX * player.getSkillLevel(SkillID.weaponDmg));
-		player.damagePotential.add(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN * player.getSkillLevel(SkillID.weaponDmg), false);
-		player.blockChance += SkillCollection.PER_SKILLPOINT_INCREASE_DODGE * player.getSkillLevel(SkillID.dodge);
-		player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin);
+		player.attackChance += SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_CHANCE * player.getSkillLevel(SkillID.weaponChance) * player.attackChance / 100;
+		player.damagePotential.addToMax(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX
+			* player.getSkillLevel(SkillID.weaponDmg) * player.damagePotential.max / 100);
+		player.damagePotential.add(SkillCollection.PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN
+			* player.getSkillLevel(SkillID.weaponDmg) * player.damagePotential.current / 100
+			, false);
+		player.blockChance += SkillCollection.PER_SKILLPOINT_INCREASE_DODGE * player.getSkillLevel(SkillID.dodge) * player.blockChance / 100;
+		player.damageResistance += SkillCollection.PER_SKILLPOINT_INCREASE_BARKSKIN * player.getSkillLevel(SkillID.barkSkin); //applyDamageResistance(player);
 		if (player.hasCriticalSkillEffect()) {
 			if (player.criticalSkill > 0) {
 				player.criticalSkill += player.criticalSkill * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_CRITICALS_PERCENT * player.getSkillLevel(SkillID.moreCriticals) / 100;
@@ -43,7 +54,14 @@ public final class SkillController {
 		if (player.hasCriticalMultiplierEffect()) {
 			player.criticalMultiplier += player.criticalMultiplier * SkillCollection.PER_SKILLPOINT_INCREASE_BETTER_CRITICALS_PERCENT * player.getSkillLevel(SkillID.betterCriticals) / 100;
 		}
-		controllers.actorStatsController.addActorMaxAP(player, SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed), false);
+		controllers.actorStatsController.addActorMaxAP(player,
+			SkillCollection.PER_SKILLPOINT_INCREASE_SPEED * player.getSkillLevel(SkillID.speed),
+			false);
+		/*controllers.actorStatsController.addActorMaxHealth(player
+			, SkillCollection.PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH *
+			player.getSkillLevel(SkillCollection.SkillID.fortitude)
+			,true);*/
+
 		/*final int berserkLevel = player.getSkillLevel(Skills.SKILL_BERSERKER);
 		if (berserkLevel > 0) {
 			final int berserkHealth = player.health.max * Skills.BERSERKER_STARTS_AT_HEALTH_PERCENT / 100;
