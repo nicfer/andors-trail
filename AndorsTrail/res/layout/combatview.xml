@@ -20,6 +20,30 @@
 			android:text="@string/combat_attack"
 			/>
 
+		<Button android:id="@+id/combatview_moveattack_strong"
+			android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	    	android:minHeight="0dp"
+			android:textSize="@dimen/actionbar_text"
+			android:text="@string/combat_attack_strong"
+			/>
+
+		<Button android:id="@+id/combatview_moveattack_parry"
+			android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	    	android:minHeight="0dp"
+			android:textSize="@dimen/actionbar_text"
+			android:text="@string/combat_attack_parry"
+			/>
+
+		<Button android:id="@+id/combatview_moveattack_precise"
+			android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	    	android:minHeight="0dp"
+			android:textSize="@dimen/actionbar_text"
+			android:text="@string/combat_attack_precise"
+			/>
+
 		<TextView android:id="@+id/combatview_status"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
