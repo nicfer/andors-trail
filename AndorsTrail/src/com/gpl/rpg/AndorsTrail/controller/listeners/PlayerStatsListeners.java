@@ -9,8 +9,17 @@ public final class PlayerStatsListeners extends ListOfListeners<PlayerStatsListe
 		@Override public void call(PlayerStatsListener listener, Player p) { listener.onPlayerExperienceChanged(p); }
 	};
 
+	private final Function1<PlayerStatsListener, Player> onPlayerLevelChanged = new Function1<PlayerStatsListener, Player>() {
+		@Override public void call(PlayerStatsListener listener, Player p) { listener.onPlayerLevelChanged(p); }
+	};
+
 	@Override
 	public void onPlayerExperienceChanged(Player p) {
 		callAllListeners(this.onPlayerExperienceChanged, p);
+	}
+
+	@Override
+	public void onPlayerLevelChanged(Player p) {
+		callAllListeners(this.onPlayerLevelChanged, p);
 	}
 }

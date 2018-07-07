@@ -47,6 +47,9 @@ public final class Loot {
 	public boolean hasItems() {
 		return !items.isEmpty();
 	}
+	public boolean hasUncommonItems() {
+		return !items.hasUncommon();
+	}
 	public boolean isContainer() {
 		return !isVisible;
 	}

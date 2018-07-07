@@ -30,6 +30,9 @@ import com.gpl.rpg.AndorsTrail.util.Coord;
 public final class CombatView extends RelativeLayout implements CombatSelectionListener, CombatTurnListener, ActorStatsListener {
 	private final TextView statusTextView;
 	private final Button attackMoveButton;
+	private final Button attackMoveButton_strong;
+	private final Button attackMoveButton_parry;
+	private final Button attackMoveButton_precise;
 	private final ImageButton monsterInfo;
 	private final RangeBar monsterHealth;
 	private final View monsterBar;
@@ -64,7 +67,31 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 		attackMoveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				c.executeMoveAttack(0, 0);
+				c.executeMoveAttack(0, 0, 0);
+			}
+		});
+
+		attackMoveButton_strong = (Button) findViewById(R.id.combatview_moveattack);
+		attackMoveButton_strong.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				c.executeMoveAttack(0, 0, 1);
+			}
+		});
+
+		attackMoveButton_parry = (Button) findViewById(R.id.combatview_moveattack);
+		attackMoveButton_parry.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				c.executeMoveAttack(0, 0, 2);
+			}
+		});
+
+		attackMoveButton_precise = (Button) findViewById(R.id.combatview_moveattack);
+		attackMoveButton_precise.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				c.executeMoveAttack(0, 0, 3);
 			}
 		});
 

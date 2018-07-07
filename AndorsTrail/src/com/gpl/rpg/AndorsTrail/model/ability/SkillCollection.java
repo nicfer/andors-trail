@@ -20,6 +20,7 @@ public final class SkillCollection {
 		,coinfinder
 		,moreCoins
 		,moreExp
+		,fortitude
 		,cleave				// +10ap on kill
 		,eater				// +1hp per kill
 		,evasion			// increase successful flee chance & reduce chance of monster attack
@@ -66,7 +67,7 @@ public final class SkillCollection {
 
 
 	public static final int PER_SKILLPOINT_INCREASE_WEAPON_CHANCE = 5;
-	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX = 5;
+	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MAX = 10;
 	public static final int PER_SKILLPOINT_INCREASE_WEAPON_DAMAGE_MIN = 10;
 	public static final int PER_SKILLPOINT_INCREASE_DODGE = 10;
 	public static final int PER_SKILLPOINT_INCREASE_BARKSKIN = 1;
@@ -95,6 +96,7 @@ public final class SkillCollection {
 	public static final int PER_SKILLPOINT_INCREASE_TAUNT_CHANCE = 75;
 	public static final int TAUNT_AP_LOSS = 2;
 	public static final int CONCUSSION_THRESHOLD = 50;
+	public static final int PER_SKILLPOINT_INCREASE_FORTITUDE_HEALTH = 1;
 	public static final int PER_SKILLPOINT_INCREASE_CONCUSSION_CHANCE = 15;
 	public static final int PER_SKILLPOINT_INCREASE_WEAPON_PROF_AC_PERCENT = 30;
 	public static final int PER_SKILLPOINT_INCREASE_WEAPON_PROF_CS_PERCENT = 10;
@@ -156,6 +158,9 @@ public final class SkillCollection {
 				SkillLevelRequirement.requireOtherSkill(SkillID.coinfinder, 1)
 		}));
 		initializeSkill(new SkillInfo(SkillID.moreExp, MAX_LEVEL_MORE_EXP, SkillInfo.LevelUpType.alwaysShown, SkillCategory.utility, null));
+		initializeSkill(new SkillInfo(SkillID.fortitude, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
+				SkillLevelRequirement.requireExperienceLevels(15, -10)
+		}));
 		initializeSkill(new SkillInfo(SkillID.cleave, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.offense, new SkillLevelRequirement[] {
 			SkillLevelRequirement.requireOtherSkill(SkillID.weaponChance, 1)
 			,SkillLevelRequirement.requireOtherSkill(SkillID.weaponDmg, 1)
@@ -165,8 +170,8 @@ public final class SkillCollection {
 		}));
 		initializeSkill(new SkillInfo(SkillID.evasion, MAX_LEVEL_EVASION, SkillInfo.LevelUpType.alwaysShown, SkillCategory.defense, null));
 		initializeSkill(new SkillInfo(SkillID.regeneration, SkillInfo.MAXLEVEL_NONE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requirePlayerStats(Player.StatID.maxHP, 30, 0)
-			,SkillLevelRequirement.requireExperienceLevels(15, -5)
+			SkillLevelRequirement.requireOtherSkill(SkillID.eater, 1)
+			,SkillLevelRequirement.requireOtherSkill(SkillID.fortitude, 1)
 		}));
 		initializeSkill(new SkillInfo(SkillID.resistanceMental, MAX_LEVEL_RESISTANCE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, null));
 		initializeSkill(new SkillInfo(SkillID.resistancePhysical, MAX_LEVEL_RESISTANCE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, null));

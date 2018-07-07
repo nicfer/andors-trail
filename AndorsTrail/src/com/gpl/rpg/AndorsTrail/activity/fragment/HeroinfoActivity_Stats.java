@@ -145,7 +145,7 @@ public final class HeroinfoActivity_Stats extends Fragment {
 			, player.baseTraits.moveCost
 			, player.baseTraits.attackCost
 			, player.baseTraits.attackChance
-			, player.baseTraits.damagePotential
+			, player.getBaseDamagePotential()//player.baseTraits.damagePotential
 			, player.baseTraits.criticalSkill
 			, player.baseTraits.criticalMultiplier
 			, player.baseTraits.blockChance

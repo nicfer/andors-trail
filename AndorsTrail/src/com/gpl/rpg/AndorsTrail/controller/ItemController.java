@@ -118,17 +118,17 @@ public final class ItemController {
 	private boolean pickupLootBagWithoutConfirmation(Loot bag) {
 		if (bag.isContainer()) return false;
 		switch (controllers.preferences.displayLoot) {
-			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_ALWAYS:
+			case AndorsTrailPreferences.DISPLAYLOOT_NONE:
 				return false;
-			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_FOR_ITEMS:
-			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_FOR_ITEMS_ELSE_TOAST:
+			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_WHEN_NOT_COMMON_ELSE_NONE:
+			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_WHEN_ITEMS_ELSE_NONE:
 				if (bag.hasItems()) return false;
 		}
 		return true;
 	}
 
 	private boolean pickupLootBagsWithoutConfirmation(Collection<Loot> bags) {
-		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_DIALOG_ALWAYS) return false;
+		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_NONE) return false;
 		for (Loot bag : bags) {
 			if (!pickupLootBagWithoutConfirmation(bag)) return false;
 		}

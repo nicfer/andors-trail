@@ -78,8 +78,8 @@ public final class DebugInterface {
 				@Override
 				public void onClick(View arg0) {
 					int xpToAdd = 10000;
-					if (world.model.player.levelExperience.max > 100000) {
-						xpToAdd = (int) Math.pow(10, (int) Math.log10(world.model.player.levelExperience.max));
+					if (world.model.player.skillupExperience.max > 100000) {
+						xpToAdd = (int) Math.pow(10, (int) Math.log10(world.model.player.skillupExperience.max));
 					}
 					controllerContext.actorStatsController.addExperience(xpToAdd);
 					showToast(mainActivity, "DEBUG: given " + xpToAdd + " exp", Toast.LENGTH_SHORT);

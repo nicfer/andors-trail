@@ -51,7 +51,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 	public void onRelativeMovement(int dx, int dy) {
 		if (!allowInputInterval()) return;
 		if (world.model.uiSelections.isInCombat) {
-			controllers.combatController.executeMoveAttack(dx, dy);
+			controllers.combatController.executeMoveAttack(dx, dy, 0);
 		} else {
 			controllers.movementController.startMovement(dx, dy, null);
 		}

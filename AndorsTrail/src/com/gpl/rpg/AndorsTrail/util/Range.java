@@ -69,6 +69,10 @@ public final class Range {
 		this.max += r.max;
 		this.current += r.current;
 	}
+	public void add(Range r) {
+		this.max += r.max;
+		this.current += r.current;
+	}
 
 	public String toString() { return current + "/" + max; }
 	public String toMinMaxString() {

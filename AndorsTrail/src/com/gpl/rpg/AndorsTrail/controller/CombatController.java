@@ -124,11 +124,11 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		return MovementController.getAdjacentAggressiveMonster(world.model.currentMap, world.model.player);
 	}
 
-	public void executeMoveAttack(int dx, int dy) {
+	public void executeMoveAttack(int dx, int dy, int type) {
 		if (!world.model.uiSelections.isPlayersCombatTurn) return;
 
 		if (world.model.uiSelections.selectedMonster != null) {
-			executePlayerAttack();
+			executePlayerAttack(type);
 		} else if (world.model.uiSelections.selectedPosition != null) {
 			executeCombatMove(world.model.uiSelections.selectedPosition);
 		} else if (controllers.effectController.isRunningVisualEffect()) {
@@ -141,7 +141,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			Monster m = getAdjacentAggressiveMonster();
 			if (m == null) return;
 			setCombatSelection(m);
-			executePlayerAttack();
+			executePlayerAttack(type);
 		}
 	}
 
@@ -154,13 +154,13 @@ public final class CombatController implements VisualEffectCompletedCallback {
 	}
 
 	private AttackResult lastAttackResult;
-	private void executePlayerAttack() {
+	private void executePlayerAttack(int type) {
 		if (controllers.effectController.isRunningVisualEffect()) return;
 		if (!useAPs(world.model.player.getAttackCost())) return;
 		final Monster target = world.model.uiSelections.selectedMonster;
 		final Coord attackPosition = world.model.uiSelections.selectedPosition;
 
-		final AttackResult attack = playerAttacks(target);
+		final AttackResult attack = playerAttacks(target, type);
 		this.lastAttackResult = attack;
 
 		if (attack.isHit) {
@@ -504,7 +504,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		return result;
 	}
 
-	private AttackResult playerAttacks(Monster currentMonster) {
+	private AttackResult playerAttacks(Monster currentMonster, int type) {
 		AttackResult result = attack(world.model.player, currentMonster);
 		controllers.skillController.applySkillEffectsFromPlayerAttack(result, currentMonster);
 		return result;
@@ -532,15 +532,18 @@ public final class CombatController implements VisualEffectCompletedCallback {
 
 		int damage = Constants.rollValue(attacker.getDamagePotential());
 		boolean isCriticalHit = Constants.roll100(attacker.getEffectiveCriticalChance());
-		float critMult = 1;
 		if (isCriticalHit) {
-			critMult = attacker.getCriticalMultiplier();
-			if (!hasCriticalAttack(attacker, target)) {
-				critMult = Math.max(critMult-1,1);
+			float critMult;
+			float critResist = Math.max(target.getCriticalResist(),0f) + 1;
+			if (hasCriticalAttack(attacker, target)) {
+				critMult = attacker.getCriticalMultiplier();
+				damage *= Math.max(critMult / critResist,1);
+			} else {
+				critMult = 1 + attacker.getCriticalMultiplier() / (8 + critResist*2);
+				damage *= critMult;
 			}
-			damage = (int) (damage * critMult);
 		}
-		damage = (int) (damage - target.getDamageResistance() * critMult);
+		damage = damage - target.getDamageResistance();
 		if (damage < 0) damage = 0;
 		controllers.actorStatsController.removeActorHealth(target, damage);
 

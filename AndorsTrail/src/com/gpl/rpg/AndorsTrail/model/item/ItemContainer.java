@@ -60,7 +60,22 @@ public class ItemContainer {
 			addItem(e.itemType, e.quantity);
 		}
 	}
+
 	public boolean isEmpty() { return items.isEmpty(); }
+
+	public boolean hasUncommon() {
+		for (ItemEntry i: items) {
+			switch (i.itemType.displayType) {
+				case rare:
+				case quest:
+				case legendary:
+				case extraordinary:
+					return true;
+			}
+
+		}
+		return false;
+	}
 
 	public boolean removeItem(String itemTypeID) { return removeItem(itemTypeID, 1); }
 	public boolean removeItem(String itemTypeID, int quantity) {

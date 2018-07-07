@@ -402,46 +402,17 @@ public final class ActorStatsController {
 	}
 
 	public static enum LevelUpSelection {
-		health
+		blockChance
 		,attackChance
 		,attackDamage
-		,blockChance
+		,maxDamage
 	}
 
-	public void addLevelupEffect(Player player, LevelUpSelection selectionID) {
-		switch (selectionID) {
-			case health:
-				if (player.baseTraits.hpPerLvl <= 0) {
-					player.baseTraits.hpPerLvl = Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
-				} else {
-					player.baseTraits.hpPerLvl += Constants.LEVELUP_EFFECT_HP_PER_LVL;
-				}
-				break;
-			case attackChance:
-				player.baseTraits.attackChance += Constants.LEVELUP_EFFECT_ATK_CH;
-				break;
-			case attackDamage:
-				player.baseTraits.damagePotential.max += Constants.LEVELUP_EFFECT_ATK_DMG;
-				player.baseTraits.damagePotential.current += Constants.LEVELUP_EFFECT_ATK_DMG;
-				break;
-			case blockChance:
-				player.baseTraits.blockChance += Constants.LEVELUP_EFFECT_DEF_CH;
-				break;
-		}
-
-		player.baseTraits.hpFrags += player.baseTraits.hpPerLvl;
-		int advanceHP = player.baseTraits.hpFrags / Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
-		if (advanceHP > 0) {
-			player.baseTraits.hpFrags -= advanceHP * Constants.LEVELUP_EFFECT_FORTITUDE_EVERY_N_LEVELS;
-			player.baseTraits.maxHP += advanceHP;
-		}
-
-		if (player.nextLevelAddsNewSkillpoint()) {
-			player.availableSkillIncreases++;
-		}
+	public void addLevelupEffect(Player player) {
+		player.availableSkillIncreases++;
 		player.level++;
-
 		recalculatePlayerStats(player);
+		playerStatsListeners.onPlayerLevelChanged(player);
 	}
 
 	public void healAllMonsters(MonsterSpawnArea area) {
@@ -455,7 +426,9 @@ public final class ActorStatsController {
 		if (exp == 0) return;
 		Player p = world.model.player;
 		p.totalExperience += exp;
-		p.levelExperience.add(exp, true);
+		p.skillupExperience.add(exp, true);
+		if (p.skillupExperience.current > p.skillupExperience.max)
+			addLevelupEffect(p);
 		playerStatsListeners.onPlayerExperienceChanged(p);
 	}
 	public void addActorMoveCost(Actor actor, int amount) {

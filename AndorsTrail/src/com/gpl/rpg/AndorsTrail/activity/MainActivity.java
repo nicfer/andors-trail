@@ -2,16 +2,13 @@ package com.gpl.rpg.AndorsTrail.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +28,6 @@ import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.WorldEventListener;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
-import com.gpl.rpg.AndorsTrail.model.item.ItemContainer.ItemEntry;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
 import com.gpl.rpg.AndorsTrail.model.map.MapObject;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
@@ -39,7 +35,6 @@ import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
 import com.gpl.rpg.AndorsTrail.util.Coord;
 import com.gpl.rpg.AndorsTrail.view.*;
-import com.gpl.rpg.AndorsTrail.view.QuickButton.QuickButtonContextMenuInfo;
 
 import java.lang.ref.WeakReference;
 import java.util.Collection;
@@ -433,7 +428,7 @@ public final class MainActivity
 
 	@Override
 	public void onPlayerPickedUpGroundLoot(Loot loot) {
-		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_NONE) return;
+		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_DIALOG) return;
 		if (!showToastForPickedUpItems(loot)) return;
 
 		final String msg = Dialogs.getGroundLootPickedUpMessage(this, loot);
@@ -443,10 +438,11 @@ public final class MainActivity
 	private boolean showToastForPickedUpItems(Loot loot) {
 		switch (controllers.preferences.displayLoot) {
 			case AndorsTrailPreferences.DISPLAYLOOT_TOAST:
-			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_FOR_ITEMS_ELSE_TOAST:
 				return true;
-			case AndorsTrailPreferences.DISPLAYLOOT_TOAST_FOR_ITEMS:
+			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_WHEN_ITEMS_ELSE_TOAST:
 				return loot.hasItems();
+			case AndorsTrailPreferences.DISPLAYLOOT_DIALOG_WHEN_NOT_COMMON_ELSE_TOAST:
+				return !loot.hasUncommonItems();
 		}
 		return false;
 	}
@@ -460,7 +456,7 @@ public final class MainActivity
 
 	@Override
 	public void onPlayerPickedUpMonsterLoot(Collection<Loot> loot, int exp) {
-		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_NONE) return;
+		if (controllers.preferences.displayLoot == AndorsTrailPreferences.DISPLAYLOOT_DIALOG) return;
 
 		final Loot combinedLoot = Loot.combine(loot);
 		if (!showToastForPickedUpItems(combinedLoot)) return;

@@ -33,8 +33,10 @@ public final class Player extends Actor {
 	// TODO: Should be privates
 	public int level;
 	public final PlayerBaseTraits baseTraits = new PlayerBaseTraits();
-	public final Range levelExperience; // ranges from 0 to the delta-amount of exp required for next level
+	public final Range skillupExperience; // ranges from 0 to the delta-amount of exp required for next level
 	public final Inventory inventory;
+	private final HashMap<String, Integer> levels = new HashMap<>();
+	private final HashMap<String, Range> expBar = new HashMap<>(); // ranges from 0 to the delta-amount of exp required for next level
 	private final SparseIntArray skillLevels = new SparseIntArray();
 	public int availableSkillIncreases = 0;
 	public int useItemCost;
@@ -64,6 +66,15 @@ public final class Player extends Actor {
 		public int reequipCost;
 	}
 
+	public static enum expBarEnum {
+		skills,
+		hp,
+		attackChance,
+		blockChance,
+		attackDamage,
+		maxAttackDamage,
+	}
+
 	public void resetStatsToBaseTraits() {
 		this.iconID = this.baseTraits.iconID;
 		this.ap.max = this.baseTraits.maxAP;
@@ -88,7 +99,7 @@ public final class Player extends Actor {
 			, false // isImmuneToCriticalHits
 		);
 		this.nextPosition = new Coord();
-		this.levelExperience = new Range();
+		this.skillupExperience = new Range();
 		this.inventory = new Inventory();
 	}
 
@@ -112,6 +123,50 @@ public final class Player extends Actor {
 		this.totalExperience = 1;
 		this.inventory.clear();
 		this.questProgress.clear();
+		this.levels.clear();
+		this.expBar.clear();
+		this.skillLevels.clear();
+		this.availableSkillIncreases = 0;
+		this.alignments.clear();
+		this.ap.set(baseTraits.maxAP, baseTraits.maxAP);
+		this.health.set(baseTraits.maxHP, baseTraits.maxHP);
+		this.conditions.clear();
+
+		Loot startItems = new Loot();
+		dropLists.getDropList(DropListCollection.DROPLIST_STARTITEMS).createRandomLoot(startItems, this);
+		inventory.add(startItems);
+
+		if (AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES) {
+			this.spawnMap = "debugmap";
+			this.spawnPlace = "start";
+		} else {
+			this.spawnMap = "home";
+			this.spawnPlace = "rest";
+		}
+	}
+
+	public void initializeHardPlayer(DropListCollection dropLists, String playerName) {
+		baseTraits.iconID = TileManager.CHAR_HERO;
+		baseTraits.maxAP = 10;
+		baseTraits.maxHP = 1;
+		baseTraits.moveCost = 6;
+		baseTraits.attackCost = DEFAULT_PLAYER_ATTACKCOST;
+		baseTraits.attackChance = 0;
+		baseTraits.criticalSkill = 0;
+		baseTraits.criticalMultiplier = 1;
+		baseTraits.criticalResist= 0;
+		baseTraits.damagePotential.set(0, 0);
+		baseTraits.blockChance = 0;
+		baseTraits.damageResistance = 0;
+		baseTraits.useItemCost = 5;
+		baseTraits.reequipCost = 5;
+		this.name = playerName;
+		this.level = 1;
+		this.totalExperience = 1;
+		this.inventory.clear();
+		this.questProgress.clear();
+		this.expBar.clear();
+		this.levels.clear();
 		this.skillLevels.clear();
 		this.availableSkillIncreases = 0;
 		this.alignments.clear();
@@ -162,25 +217,33 @@ public final class Player extends Actor {
 	}
 
 	public void recalculateLevelExperience() {
-		int discount = getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT;
-		int experienceRequiredToReachThisLevel = getRequiredExperience(level);
-		levelExperience.set(getRequiredExperienceForNextLevel(level) * (100 - discount) / 100,// - discountExp,
-				totalExperience - experienceRequiredToReachThisLevel);
+		for (int i = 0; i < levels.size(); i++) {
+			
+		}
 	}
 
-	private static int getRequiredExperience(int currentLevel) {
+	public void recalculateLevelExperience(String expBarID) {
+		int level = levels.get(expBarID);
+		int discount = getSkillLevel(SkillCollection.SkillID.moreExp) * SkillCollection.PER_SKILLPOINT_INCREASE_MORE_EXP_PERCENT;
+		int experienceRequiredToReachThisLevel = getRequiredExperience(expBarID,level);
+		int discountedExp = getRequiredExperienceForNextLevel(expBarID,level) * (100 - discount) / 100;
+		expBar.get(expBarID).set(discountedExp,
+				expBar.get(expBarID).max - experienceRequiredToReachThisLevel);
+	}
+
+	private static int getRequiredExperience(String expBarID,int currentLevel) {
 		int v = 0;
 		for(int i = 1; i < currentLevel; ++i) {
-			v += getRequiredExperienceForNextLevel(i);
+			v += getRequiredExperienceForNextLevel(expBarID,i);
 		}
 		return v;
 	}
-	private static int getRequiredExperienceForNextLevel(int currentLevel) {
+	private static int getRequiredExperienceForNextLevel(String expBarID,int currentLevel) {
 		return (int) (Constants.LEVELUP_SPEED_FACTOR * currentLevel * currentLevel);
 	}
 
-	public boolean canLevelup() {
-		return levelExperience.isMax();
+	public boolean canLevelup(String expBarID) {
+		return skillupExperience.isMax();
 	}
 
 	public void addSkillLevel(SkillCollection.SkillID skillID) {
@@ -192,8 +255,8 @@ public final class Player extends Actor {
 	public boolean hasSkill(SkillCollection.SkillID skillID) {
 		return getSkillLevel(skillID) > 0;
 	}
-	public boolean nextLevelAddsNewSkillpoint() {
-		return thisLevelAddsNewSkillpoint(level + 1);
+	public boolean nextLevelAddsNewSkillpoint(String expBarID) {
+		return thisLevelAddsNewSkillpoint(levels.get(expBarID) + 1);
 	}
 	private static boolean thisLevelAddsNewSkillpoint(int level) {
 		return ((level - Constants.FIRST_SKILL_POINT_IS_GIVEN_AT_LEVEL) % Constants.NEW_SKILL_POINT_EVERY_N_LEVELS == 0);
@@ -226,8 +289,8 @@ public final class Player extends Actor {
 	public int getAvailableSkillIncreases() { return availableSkillIncreases; }
 	public int getLevel() { return level; }
 	public int getTotalExperience() { return totalExperience; }
-	public int getCurrentLevelExperience() { return levelExperience.current; }
-	public int getMaxLevelExperience() { return levelExperience.max; }
+	public int getCurrentLevelExperience() { return skillupExperience.current; }
+	public int getMaxLevelExperience() { return skillupExperience.max; }
 	public int getGold() { return inventory.gold; }
 	public String getSpawnMap() { return spawnMap; }
 	public String getSpawnPlace() { return spawnPlace; }
@@ -315,8 +378,16 @@ public final class Player extends Actor {
 
 		this.lastPosition.readFromParcel(src, fileversion);
 		this.nextPosition.readFromParcel(src, fileversion);
-		this.level = src.readInt();
-		this.totalExperience = src.readInt();
+		final int numLevels = src.readInt();
+		for(int i = 0; i < numLevels; ++i) {
+			final String levelID = src.readUTF();
+			this.levels.put(levelID, src.readInt());
+		}
+		final int numExpBars = src.readInt();
+		for(int i = 0; i < numExpBars; ++i) {
+			final String expBarID = src.readUTF();
+			this.expBar.put(expBarID, new Range(src, fileversion));
+		}
 		this.inventory.readFromParcel(src, world, fileversion);
 
 		if (fileversion <= 13) LegacySavegameFormatReaderForPlayer.readQuestProgressPreV13(this, src, world, fileversion);
@@ -388,8 +459,16 @@ public final class Player extends Actor {
 		}
 		lastPosition.writeToParcel(dest);
 		nextPosition.writeToParcel(dest);
-		dest.writeInt(level);
-		dest.writeInt(totalExperience);
+		dest.writeInt(levels.size());
+		for(Entry<String, Integer > e : levels.entrySet()) {
+			dest.writeUTF(e.getKey());
+			dest.writeInt(e.getValue());
+		}
+		dest.writeInt(expBar.size());
+		for(Entry<String, Range > e : expBar.entrySet()) {
+			dest.writeUTF(e.getKey());
+			e.getValue().writeToParcel(dest);
+		}
 		inventory.writeToParcel(dest);
 		dest.writeInt(baseTraits.useItemCost);
 		dest.writeInt(baseTraits.reequipCost);

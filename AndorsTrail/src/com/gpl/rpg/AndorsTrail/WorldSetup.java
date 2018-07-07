@@ -144,7 +144,11 @@ public final class WorldSetup {
 	private void createNewWorld() {
 		Context ctx = androidContext.get();
 		world.model = new ModelContainer();
-		world.model.player.initializeNewPlayer(world.dropLists, newHeroName);
+		if (newHeroName.startsWith("Andor")) {
+			world.model.player.initializeHardPlayer(world.dropLists, newHeroName);
+		} else {
+			world.model.player.initializeNewPlayer(world.dropLists, newHeroName);
+		}
 
 		controllers.actorStatsController.recalculatePlayerStats(world.model.player);
 		controllers.movementController.respawnPlayer(ctx.getResources());
